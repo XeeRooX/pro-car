@@ -1,7 +1,7 @@
 ﻿namespace ProCar.Models
 {
-    // Бренд
-    public class Brand
+    // Тип коробки передач
+    public class GearboxType
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;
