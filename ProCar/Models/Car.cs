@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using System.Reflection.Metadata.Ecma335;
 using System.Security.Principal;
 
 namespace ProCar.Models
@@ -13,7 +14,20 @@ namespace ProCar.Models
         public int Deposit { get; set; } // залог
         public int TimeDelayCost { get; set; } // стоимость задержки по времени
 
-        public CarType CarType { get; set; } = null!;
+        public int CarTypeId { get; set; }
+        public CarType CarType { get; set; } = new();
+
+        public int BrandId { get; set; }
+        public Brand Brand { get; set; } = new();
+
+        public int DriveTypeId { get; set; }
+        public DriveType DriveType { get; set; } = new();
+
+        public int FuelTypeId { get; set; }
+        public FuelType FuelType { get; set; } = new();
+
+        public int GearboxTypeId { get; set; }
+        public GearboxType GearboxType { get; set; } = new();
 
     }
 }

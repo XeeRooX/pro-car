@@ -1,4 +1,6 @@
-﻿namespace ProCar.Models
+﻿using Microsoft.AspNetCore.Mvc.Formatters;
+
+namespace ProCar.Models
 {
     // Бренд
     public class Brand
