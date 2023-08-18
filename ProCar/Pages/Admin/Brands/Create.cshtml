@@ -1,0 +1,13 @@
+﻿@page
+@model ProCar.Pages.Admin.Brands.CreateModel
+@{
+}
+
+<p>@Model.Message</p>
+<form method="post">
+    <div class="mb-3">
+        <label for="Name" class="form-label">Название</label>
+        <input type="text" name="name" class="form-control" id="Name" aria-describedby="emailHelp">
+    </div>
+    <button type="submit" class="btn btn-primary">Добавить</button>
+</form>
