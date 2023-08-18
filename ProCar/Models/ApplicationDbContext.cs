@@ -10,5 +10,9 @@ namespace ProCar.Models
         public DbSet<GearboxType> GearboxTypes { get; set; } = null!;
         public DbSet<FuelType> FuelTypes { get; set; } = null!;
         public DbSet<Brand> Brands { get; set; } = null!;
+
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        {
+        }
     }
 }
