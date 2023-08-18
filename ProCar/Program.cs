@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ProCar.Models;
+using ProCar.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,8 @@ builder.Services.AddRazorPages();
 
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connectionString));
+
+builder.Services.AddScoped<ICarTypeService, CarTypeService>();
 
 var app = builder.Build();
 
