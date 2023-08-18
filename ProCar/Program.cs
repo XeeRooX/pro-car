@@ -10,6 +10,8 @@ builder.Services.AddRazorPages();
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connectionString));
 
+builder.Services.AddScoped<IBrandService, BrandService>();
+
 builder.Services.AddScoped<ICarTypeService, CarTypeService>();
 
 var app = builder.Build();
