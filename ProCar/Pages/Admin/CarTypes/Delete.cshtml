@@ -1,0 +1,11 @@
+﻿@page "{id}"
+@model ProCar.Pages.Admin.CarTypes.DeleteModel
+@{
+    Layout = "_Layout2";
+}
+<h2>Вы уверены?</h2>
+<form method="post">
+    <input name="id" value="@RouteData.Values["id"]" class="d-none"/>
+    <button class="btn btn-dark" type="submit">Да</button>
+</form>
+<a class="btn btn-dark" asp-page="/Admin/CarTypes/Index">Нет</a>

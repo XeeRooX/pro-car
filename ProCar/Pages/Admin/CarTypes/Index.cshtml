@@ -1,8 +1,31 @@
 ﻿@page
 @model ProCar.Pages.Admin.CarTypes.IndexModel
 @{
-    foreach (var item in Model.CarTypes)
-    {
-        <p>@item.Name</p>
-    }
+    Layout = "_Layout2";
 }
+
+<h2>Section title</h2>
+<div class="table-responsive small">
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th scope="col">Название</th>
+                <th scope="col">Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var item in Model.CarTypes)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>
+                            <a asp-page="/Admin/CarTypes/Edit" asp-route-id="@item.Id">Редактировать</a>
+                            <a asp-page="/Admin/CarTypes/Delete" asp-route-id="@item.Id">Удалить</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
