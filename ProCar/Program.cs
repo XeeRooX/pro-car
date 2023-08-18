@@ -12,6 +12,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite
 
 builder.Services.AddScoped<IBrandService, BrandService>();
 
+builder.Services.AddScoped<ICarTypeService, CarTypeService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -1,0 +1,8 @@
+﻿@page
+@model ProCar.Pages.Admin.CarTypes.IndexModel
+@{
+    foreach (var item in Model.CarTypes)
+    {
+        <p>@item.Name</p>
+    }
+}
