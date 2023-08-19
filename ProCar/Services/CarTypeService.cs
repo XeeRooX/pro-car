@@ -47,6 +47,9 @@ namespace ProCar.Services
             return _context.CarTypes.Find(id)!;
         }
 
-
+        public bool ValueExists(string name)
+        {
+            return _context.CarTypes.FirstOrDefault(x=>x.Name == name) != null; 
+        }
     }
 }

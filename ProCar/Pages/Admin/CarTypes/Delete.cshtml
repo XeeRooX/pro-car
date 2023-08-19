@@ -6,6 +6,6 @@
 <h2>Вы уверены?</h2>
 <form method="post">
     <input name="id" value="@RouteData.Values["id"]" class="d-none"/>
-    <button class="btn btn-dark" type="submit">Да</button>
+    <button class="btn btn-primary" type="submit">Да</button>
+    <a class="btn btn-secondary" asp-page="/Admin/CarTypes/Index">Нет</a>
 </form>
-<a class="btn btn-dark" asp-page="/Admin/CarTypes/Index">Нет</a>
