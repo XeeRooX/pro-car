@@ -14,8 +14,8 @@ string connectionString = builder.Configuration.GetConnectionString("DefaultConn
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connectionString));
 
 builder.Services.AddScoped<IBrandService, BrandService>();
-
 builder.Services.AddScoped<ICarTypeService, CarTypeService>();
+builder.Services.AddScoped<ICarsService, CarsService>();
 
 var app = builder.Build();
 
