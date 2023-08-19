@@ -31,7 +31,6 @@ namespace ProCar.Services
             brand!.Name = name;
             _context.Brands.Update(brand);
             _context.SaveChanges();
-            throw new NotImplementedException();
         }
 
         public Brand GetById(int id)

@@ -1,7 +1,29 @@
 ﻿@page
 @model ProCar.Pages.Admin.Brands.IndexModel
-@{
-    foreach(var item in Model.Brands){
-        <p>@item.Name</p>
-    }
-}
+
+<h2>Список брендов автомобилей</h2>
+<a class="btn btn-secondary" href="/admin/brands/create">Добавить новый бренд</a>
+<div class="table-responsive small">
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th scope="col">Название</th>
+                <th scope="col">Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var item in Model.Brands)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>
+                            <a asp-page="/Admin/Brands/Edit" asp-route-id="@item.Id">Редактировать</a>
+                            <a asp-page="/Admin/Brands/Delete" asp-route-id="@item.Id">Удалить</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

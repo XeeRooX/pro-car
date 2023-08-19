@@ -3,6 +3,11 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+
+/ProCar/Data/imgs/**/*.jpg
+/ProCar/Data/imgs/**/*.png
+/ProCar/Data/imgs/**/*.img
+
 *.db
 # User-specific files
 *.rsuser

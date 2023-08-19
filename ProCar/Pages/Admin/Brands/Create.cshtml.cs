@@ -17,7 +17,7 @@ namespace ProCar.Pages.Admin.Brands
         {
         }
 
-        public IActionResult OnPost(string name)
+        public IActionResult OnPost(string name, IFormFileCollection uploads)
         {
             if (_brandService.ElementExists(name))
             {
@@ -29,6 +29,22 @@ namespace ProCar.Pages.Admin.Brands
                 Message = "ошибка добавления: неккоректно введено значение";
                 return Page();
             }
+
+            IFormFileCollection files = uploads;
+
+            var uploadPath = $"{Directory.GetCurrentDirectory()}/Data/imgs/brands";
+            Directory.CreateDirectory(uploadPath);
+
+            foreach(var file in files)
+            {
+                string fullPath = $"{uploadPath}/{file.FileName}";
+
+                using (var fileStream = new FileStream(fullPath, FileMode.Create))
+                {
+                    file.CopyTo(fileStream);
+                }
+            }
+
 
             Console.WriteLine(name);
             _brandService.AddType(name);
