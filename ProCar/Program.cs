@@ -17,6 +17,8 @@ builder.Services.AddScoped<IBrandService, BrandService>();
 
 builder.Services.AddScoped<ICarTypeService, CarTypeService>();
 
+builder.Services.AddScoped<IServerUploadService, ServerUploadService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -43,6 +45,13 @@ app.UseFileServer(new FileServerOptions()
     FileProvider = new PhysicalFileProvider(
         Path.Combine(env.ContentRootPath, "node_modules")),
     RequestPath = "/node_modules",
+    EnableDirectoryBrowsing = false
+});
+app.UseFileServer(new FileServerOptions()
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(env.ContentRootPath, "Data")),
+    RequestPath = "/Data",
     EnableDirectoryBrowsing = false
 });
 app.Run();

@@ -7,11 +7,13 @@ namespace ProCar.Pages.Admin.Brands
     public class CreateModel : PageModel
     {
         private IBrandService _brandService;
+        private IServerUploadService _serverUploadService;
 
         public string Message { get; set; }
-        public CreateModel(IBrandService brandService)
+        public CreateModel(IBrandService brandService, IServerUploadService serverUploadService)
         {
             _brandService = brandService;
+            _serverUploadService = serverUploadService;
         }
         public void OnGet()
         {
@@ -29,25 +31,15 @@ namespace ProCar.Pages.Admin.Brands
                 Message = "ошибка добавления: неккоректно введено значение";
                 return Page();
             }
-
-            IFormFileCollection files = uploads;
-
-            var uploadPath = $"{Directory.GetCurrentDirectory()}/Data/imgs/brands";
-            Directory.CreateDirectory(uploadPath);
-
-            foreach(var file in files)
+            int id = _brandService.AddType(name).Id;
+            if (!_serverUploadService.TypeFilePng(uploads))
             {
-                string fullPath = $"{uploadPath}/{file.FileName}";
-
-                using (var fileStream = new FileStream(fullPath, FileMode.Create))
-                {
-                    file.CopyTo(fileStream);
-                }
+                Message = "ошибка добавления: непподерживаемый тип файла";
+                return Page();
             }
 
-
-            Console.WriteLine(name);
-            _brandService.AddType(name);
+            _serverUploadService.UploadBrandPhoto(id, uploads);
+          
             return RedirectToPage("/Admin/Brands/Index");
 
 

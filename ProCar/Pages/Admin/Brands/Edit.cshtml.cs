@@ -8,12 +8,14 @@ namespace ProCar.Pages.Admin.Brands
     public class EditModel : PageModel
     {
         private IBrandService _brandService;
+        private IServerUploadService _uploadService;
 
         public string? Message { get; set; }
         public Brand Brand { get; set; } = new();
-        public EditModel(IBrandService brandService)
+        public EditModel(IBrandService brandService, IServerUploadService serverUploadService)
         {
             _brandService = brandService;
+            _uploadService = serverUploadService;
         }
         public IActionResult OnGet(int id)
         {
@@ -26,13 +28,13 @@ namespace ProCar.Pages.Admin.Brands
             return Page();
         }
 
-        public IActionResult OnPost(int id, string name)
+        public IActionResult OnPost(int id, string name, IFormFileCollection uploads)
         {
-            if (!_brandService.ElementExists(id) )
+            if (!_brandService.ElementExists(id))
             {
                 return NotFound();
             }
-            else if(name == null)
+            else if (name == null)
             {
                 Message = "ошибка редактирования: неккоректно введено значение";
                 Brand = _brandService.GetById(id);
@@ -44,8 +46,21 @@ namespace ProCar.Pages.Admin.Brands
                 Brand = _brandService.GetById(id);
                 return Page();
             }
+            if (uploads.Count != 0)
+            {
+                if (!_uploadService.TypeFilePng(uploads))
+                {
+                    Message = "ошибка редактирования: тип файла не поддерживается";
+                    return Page();
+                }
 
+                _uploadService.UploadBrandPhoto(id, uploads);
+
+                _brandService.EditType(id, name);
+                return RedirectToPage("/Admin/Brands/Index");
+            }
             _brandService.EditType(id, name);
+
             return RedirectToPage("/Admin/Brands/Index");
         }
     }
