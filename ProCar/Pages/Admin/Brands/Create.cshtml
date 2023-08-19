@@ -9,7 +9,11 @@
         <label for="Name" class="form-label">Название</label>
         <input type="text" name="name" class="form-control" id="Name" aria-describedby="emailHelp" required>
     </div>
-      <input type="file" name="uploads" />
+
+    <div class="mb-3">
+  <label for="formFile" class="form-label">Загрузите фото бренда</label>
+  <input class="form-control" type="file" accept="image/png" name="uploads" id="formFile" required>
+</div>
     <button type="submit" class="btn btn-primary">Добавить</button>
     <a type="submit" class="btn btn-secondary" href="/Admin/Brands/Index">Отмена</a>
 </form>
