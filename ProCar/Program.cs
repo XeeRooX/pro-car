@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
@@ -13,6 +14,9 @@ builder.Services.AddRazorPages();
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connectionString));
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => options.LoginPath = "/admin/login");
+builder.Services.AddAuthorization();
+
 builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddScoped<ICarTypeService, CarTypeService>();
 builder.Services.AddScoped<ICarsService, CarsService>();
@@ -21,6 +25,8 @@ builder.Services.AddScoped<IServerUploadService, ServerUploadService>();
 
 var app = builder.Build();
 
+app.UseAuthentication();
+app.UseAuthorization();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
