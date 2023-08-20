@@ -1,0 +1,78 @@
+﻿@page
+@model ProCar.Pages.Admin.Cars.AddModel
+@{
+}
+<h2>Добавление автомобиля</h2>
+
+<form method="post">
+    <div class="mb-3">
+        <label>Марка</label>
+        <select class="form-select">
+            <option selected value="">-- Выберите марку --</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label>Модель</label>
+        <input class="form-control" value="" required />
+    </div>
+    <div class="mb-3">
+        <label>Тип автомобиля</label>
+        <select class="form-select">
+            <option selected value="">-- Выберите тип --</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label>Тип привода</label>
+        <select class="form-select">
+            <option selected value="">-- Выберите тип --</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label>Тип коробки передач</label>
+        <select class="form-select">
+            <option selected value="">-- Выберите тип --</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label>Вид топлива</label>
+        <select class="form-select">
+            <option selected value="">-- Выберите вид --</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label>Объем двигателя</label>
+        <input class="form-control" value="" required type="number"/>
+    </div>
+    <div class="mb-3">
+        <label>Год выпуска</label>
+        <input class="form-control" value="" required type="number"/>
+    </div>
+    <div class="mb-3">
+        <label>Стоимость за суточную аренду</label>
+        <input class="form-control" value="" required type="number" />
+    </div>
+    <div class="mb-3">
+        <label>Залог</label>
+        <input class="form-control" value="" required type="number" />
+    </div>
+    <div class="mb-3">
+        <label>Стоимость задержки по времени (за 1 час)</label>
+        <input class="form-control" value="" required type="number" />
+    </div>
+    
+</form>

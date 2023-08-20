@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProCar.Models;
 using ProCar.Services;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProCar.Pages.Admin.CarTypes
 {
@@ -9,6 +11,8 @@ namespace ProCar.Pages.Admin.CarTypes
     {
         private ICarTypeService _typeService;
         public List<CarType>? CarTypes { get; set; }
+        [BindProperty]
+        public InputModel Input { get; set; }
         public string ErrorMsg { get; set; }
         public IndexModel(ICarTypeService typeService)
         {
@@ -20,24 +24,24 @@ namespace ProCar.Pages.Admin.CarTypes
             CarTypes = carTypes;
         }
 
-        public IActionResult OnPost(int id, string name) 
+        public IActionResult OnPost()
         {
-            if (string.IsNullOrEmpty(name))
+            if(!ModelState.IsValid)
             {
-                ErrorMsg = "Ошибка добавления: значение не может быть пустой строкой";
                 CarTypes = _typeService.GetAll();
                 return Page();
             }
-            if (_typeService.ValueExists(name))
-            {
-                ErrorMsg = "Ошибка добавления: элемент с таким именем уже существует";
-                CarTypes = _typeService.GetAll();
-                return Page();
-            }
-            
-            _typeService.AddType(name);
+
+            _typeService.AddType(Input.Name);
             CarTypes = _typeService.GetAll();
             return Page();
+        }
+
+        public class InputModel
+        {
+            [Required(ErrorMessage = "Это поле обязательно для заполнения")]
+            [CarTypeNameUnique]
+            public string Name { get; set; } = null!;
         }
     }
 }

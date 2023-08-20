@@ -4,12 +4,14 @@
 
 }
 <h2>Редактирование</h2>
-<p>@Model.ErrorMsg</p>
 <form method="post">
     <div class="input-group mb-3">
-        <input class="form-control" name="name" value="@Model.LastName" required />
+        <input class="form-control" asp-for="Input.Name" value="@Model.LastName" required />
         <input name="id" value="@RouteData.Values["id"]" class="d-none" />
     </div>
-    <button type="submit" class="btn btn-primary">Сохранить</button>
-    <a class="btn btn-secondary" asp-page="/Admin/CarTypes/Index">Назад</a>
+    <span asp-validation-for="Input.Name"></span> <br />
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+        <a class="btn btn-secondary" asp-page="/Admin/CarTypes/Index">Назад</a>
+    </div>
 </form>

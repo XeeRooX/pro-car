@@ -1,15 +1,20 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using ProCar.Models;
 using ProCar.Services;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProCar.Pages.Admin.CarTypes
 {
     public class EditModel : PageModel
     {
         private ICarTypeService _typeService;
-        public string LastName { get; set; }
-        public string ErrorMsg { get; set; }
+        public string? LastName { get; set; }
+        [BindProperty]
+        public InputModel? Input { get; set; }
+
 
         public EditModel(ICarTypeService typeService)
         {
@@ -25,27 +30,28 @@ namespace ProCar.Pages.Admin.CarTypes
             LastName = _typeService.GetById(id).Name;
             return Page();
         }
-
-        public IActionResult OnPost(int id, string name)
+        public IActionResult OnPost(int id)
         {
             if (!_typeService.ElementExists(id))
             {
                 return NotFound();
             }
-            if (string.IsNullOrEmpty(name))
+
+            if (!ModelState.IsValid)
             {
-                ErrorMsg = "Ошибка редактирования: значение не может быть пустой строкой";
-                return Page();
-            }
-            if (_typeService.ValueExists(name))
-            {
-                LastName = name;
-                ErrorMsg = "Ошибка редактирования: тип машины с таким именем уже существует";
+                LastName = _typeService.GetById(id).Name;
                 return Page();
             }
 
-            _typeService.EditType(id, name);
+            _typeService.EditType(id, Input.Name);
             return RedirectToPage("/Admin/CarTypes/Index");
+        }
+
+        public class InputModel
+        {
+            [Required(ErrorMessage = "Это поле обязательно для заполнения")]
+            [CarTypeNameUnique]
+            public string Name { get; set; } = null!;
         }
     }
 }
