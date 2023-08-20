@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProCar.Services;
 
 namespace ProCar.Pages.Admin.Brands
 {
+    [Authorize]
     public class CreateModel : PageModel
     {
         private IBrandService _brandService;
@@ -21,7 +23,7 @@ namespace ProCar.Pages.Admin.Brands
 
         public IActionResult OnPost(string name, IFormFileCollection uploads)
         {
-            if (_brandService.ElementExists(name))
+            if (0 != _brandService.ElementExists(name))
             {
                 Message = "ошибка добавления: элемент уже существует";
                 return Page();

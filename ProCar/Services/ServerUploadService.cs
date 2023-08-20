@@ -49,6 +49,39 @@
             }
         }
 
+        public void DeleteBrandPhoto(int id)
+        {
+            var deletePath = $"{Directory.GetCurrentDirectory()}/Data/imgs/brands/{id}.png";
+            if (File.Exists(deletePath))
+            {
+                try
+                {
+                    File.Delete(deletePath);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("The deletion failed: {0}", e.Message);
+                }
+            }
+        }
+
+        public void DeleteCarPhoto(int id)
+        {
+            var deletePath = $"{Directory.GetCurrentDirectory()}/Data/imgs/cars/{id}";
+
+            if (Directory.Exists(deletePath))
+            {
+                try
+                {
+                    Directory.Delete(deletePath);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("The deletion failed: {0}", e.Message);
+                }
+            }
+        }
+
         public bool TypeFilePng(IFormFileCollection files)
         {
             foreach (var file in files)

@@ -10,6 +10,6 @@ namespace ProCar.Services
         void DeleteType(int id);
         bool ElementExists(int id);
         List<Brand> GetAll();
-        bool ElementExists(string name);
+        int ElementExists(string name);
     }
 }

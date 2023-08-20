@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -8,6 +9,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ProCar.Pages.Admin.CarTypes
 {
+    [Authorize]
     public class EditModel : PageModel
     {
         private ICarTypeService _typeService;

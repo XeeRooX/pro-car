@@ -48,9 +48,12 @@ namespace ProCar.Services
             return _context.Brands.ToList();
         }
 
-        public bool ElementExists(string name)
+        public int ElementExists(string name)
         {
-            return _context.Brands.FirstOrDefault(item => item.Name == name) != null;
+            var brand = _context.Brands.FirstOrDefault(item => item.Name == name);
+            if (brand == null)
+                return 0;
+            return brand.Id;
         }
 
     }

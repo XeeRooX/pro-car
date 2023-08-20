@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProCar.Models;
@@ -5,6 +6,7 @@ using ProCar.Services;
 
 namespace ProCar.Pages.Admin.Brands
 {
+    [Authorize]
     public class EditModel : PageModel
     {
         private IBrandService _brandService;
@@ -40,7 +42,7 @@ namespace ProCar.Pages.Admin.Brands
                 Brand = _brandService.GetById(id);
                 return Page();
             }
-            else if (_brandService.ElementExists(name))
+            else if (id != _brandService.ElementExists(name) && 0 != _brandService.ElementExists(name))
             {
                 Message = "ошибка редактирования: элемент с таким именем уже существует";
                 Brand = _brandService.GetById(id);
