@@ -3,4 +3,35 @@
 @{
 }
 
-<h2>Автомобили</h2>
+<h2>Список всех автомобилей</h2>
+<a class="btn btn-secondary" asp-page="/Admin/Cars/Add">Добавить информацию об автомобиле</a>
+<div class="table-responsive small">
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th scope="col">Марка</th>
+                <th scope="col">Модель</th>
+                <th scope="col">Стоимость (сутки)</th>
+                <th scope="col">Год выпуска</th>
+                <th scope="col">Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var item in Model.AllCarsInfo)
+                {
+                    <tr>
+                        <td>@item.Brand</td>
+                        <td>@item.Model</td>
+                        <td>@item.CostPerDay</td>
+                        <td>@item.YearOfIssue</td>
+                        <td>
+                            <a asp-page="/Admin/Cars/Edit" asp-route-id="@item.Id">Редактировать</a>
+                            <a asp-page="/Admin/Cars/Delete" asp-route-id="@item.Id">Удалить</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

@@ -14,19 +14,20 @@ namespace ProCar.Services
         }
         public void AddCar(CarAddDto carInfo)
         {
-            var car = new Car() 
+            var car = new Car()
+
             {
                 Model = carInfo.Model,
                 EngineСapacity = carInfo.EngineСapacity,
                 YearOfIssue = carInfo.YearOfIssue,
                 CostPerDay = carInfo.CostPerDay,
-                Deposit = carInfo.Deposit,  
+                Deposit = carInfo.Deposit,
                 TimeDelayCost = carInfo.TimeDelayCost,
-                CarTypeId = carInfo.CarTypeId,
-                DriveTypeId = carInfo.DriveTypeId,
-                GearboxTypeId = carInfo.GearboxTypeId,
-                FuelTypeId = carInfo.FuelTypeId,
-                BrandId = carInfo.BrandId
+                CarType = _context.CarTypes.Find(carInfo.CarTypeId)!,
+                DriveType = _context.DriveTypes.Find(carInfo.DriveTypeId)!,
+                GearboxType = _context.GearboxTypes.Find(carInfo.GearboxTypeId)!,
+                FuelType = _context.FuelTypes.Find(carInfo.FuelTypeId)!,
+                Brand = _context.Brands.Find(carInfo.BrandId)!
             };
 
             _context.Cars.Add(car);
@@ -40,27 +41,27 @@ namespace ProCar.Services
             _context.SaveChanges();
         }
 
-        public void EditCar(CarEditDto carInfo)
+        public void EditCar(CarAddDto carInfo, int id)
         {
-            Car car = _context.Cars.Find(carInfo.CarId)!;
+            Car car = _context.Cars.Find(id)!;
             car.CostPerDay = carInfo.CostPerDay;
             car.Model = carInfo.Model;
             car.EngineСapacity = carInfo.EngineСapacity;
             car.YearOfIssue = carInfo.YearOfIssue;
             car.Deposit = carInfo.Deposit;
             car.TimeDelayCost = carInfo.TimeDelayCost;
-            car.CarTypeId = carInfo.CarTypeId;
-            car.DriveTypeId = carInfo.DriveTypeId;  
-            car.GearboxTypeId = carInfo.GearboxTypeId;
-            car.FuelTypeId = carInfo.FuelTypeId;
-            car.BrandId = carInfo.BrandId;
+            car.CarType = _context.CarTypes.Find(carInfo.CarTypeId)!;
+            car.DriveType = _context.DriveTypes.Find(carInfo.DriveTypeId)!;  
+            car.GearboxType = _context.GearboxTypes.Find(carInfo.GearboxTypeId)!;
+            car.FuelType = _context.FuelTypes.Find(carInfo.FuelTypeId)!;
+            car.Brand = _context.Brands.Find(carInfo.BrandId)!;
 
             _context.SaveChanges();
         }
 
         public bool ElementExists(int id)
         {
-            return _context.Cars.Find(id) == null;
+            return _context.Cars.Find(id) != null;
         }
 
         public List<Car> GetAllCars()
@@ -82,6 +83,7 @@ namespace ProCar.Services
             {
                 resultCars.Add(new CarAdminViewDto()
                 {
+                    Id = car.Id,
                     Model = car.Model,
                     EngineСapacity = car.EngineСapacity,
                     YearOfIssue = car.YearOfIssue,
@@ -102,6 +104,42 @@ namespace ProCar.Services
         public Car GetById(int id)
         {
             return _context.Cars.Find(id)!;
+        }
+
+        public CarAddGetDto GetDataAddCarsGet()
+        {
+            CarAddGetDto result = new() 
+            {
+                Brands = _context.Brands.ToList(),
+                CarTypes = _context.CarTypes.ToList(),
+                DriveTypes = _context.DriveTypes.ToList(),
+                FuelTypes = _context.FuelTypes.ToList(),
+                GearboxTypes = _context.GearboxTypes.ToList()
+            };
+
+            return result;
+        }
+
+        public CarEditDto GetDataEditCars(int id)
+        {
+            Car car = _context.Cars.Find(id)!;
+            CarEditDto result = new()
+            {
+                BrandId = car.BrandId,
+                CarId = id,
+                CarTypeId = car.CarTypeId,
+                CostPerDay = car.CostPerDay,
+                Deposit = car.Deposit,
+                DriveTypeId = car.DriveTypeId,
+                EngineСapacity = car.EngineСapacity,
+                FuelTypeId = car.FuelTypeId,
+                GearboxTypeId = car.GearboxTypeId,
+                Model = car.Model,
+                TimeDelayCost = car.TimeDelayCost,
+                YearOfIssue = car.YearOfIssue
+            };
+
+            return result;
         }
     }
 }

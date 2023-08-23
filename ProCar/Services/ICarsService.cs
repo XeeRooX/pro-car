@@ -7,10 +7,12 @@ namespace ProCar.Services
     {
         Car GetById(int id);
         void AddCar(CarAddDto carInfo);
-        void EditCar(CarEditDto carInfo);
+        void EditCar(CarAddDto carInfo, int id);
         void DeleteCar(int id);
         bool ElementExists(int id);
         List<Car> GetAllCars();
+        CarAddGetDto GetDataAddCarsGet();
+        CarEditDto GetDataEditCars(int id);
         List<CarAdminViewDto> GetAllCarsForView();
 
     }

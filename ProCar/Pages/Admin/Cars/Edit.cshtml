@@ -1,0 +1,148 @@
+﻿@page "{id}"
+@model ProCar.Pages.Admin.Cars.EditModel
+@{
+    Layout = "_Layout2";
+}
+<span asp-validation-for="Input"></span>
+<form method="post">
+    <div class="mb-3">
+        <label>Марка</label>
+        <select class="form-select" asp-for="Input.BrandId" required>
+            <option value="" disabled>-- Выберите марку --</option>
+            @foreach (var item in Model.DropdownFormData.Brands)
+            {
+                if (item.Id == Model.FormData.BrandId)
+                {
+                    <option value="@item.Id" selected>@item.Name</option>
+                }
+                else
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+            }
+        </select>
+        <span asp-validation-for="Input.BrandId"></span>
+    </div>
+    <div class="mb-3">
+        <label>Модель</label>
+        <input class="form-control" asp-for="Input.Model" value="@Model.FormData.Model" required />
+        <span asp-validation-for="Input.Model"></span>
+    </div>
+    <div class="mb-3">
+        <label>Тип автомобиля</label>
+        <select class="form-select" asp-for="Input.CarTypeId" required>
+            <option selected value="" disabled>-- Выберите тип --</option>
+            @foreach (var item in Model.DropdownFormData.CarTypes)
+            {
+                if (item.Id == Model.FormData.CarTypeId)
+                {
+                    <option value="@item.Id" selected>@item.Name</option>
+                }
+                else
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+            }
+        </select>
+        <span asp-validation-for="Input.CarTypeId"></span>
+    </div>
+    <div class="mb-3">
+        <label>Тип привода</label>
+        <select class="form-select" asp-for="Input.DriveTypeId" required>
+            <option selected value="" disabled>-- Выберите тип --</option>
+            @foreach (var item in Model.DropdownFormData.DriveTypes)
+            {
+                if (item.Id == Model.FormData.DriveTypeId)
+                {
+                    <option value="@item.Id" selected>@item.Name</option>
+                }
+                else
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+            }
+        </select>
+        <span asp-validation-for="Input.DriveTypeId"></span>
+    </div>
+    <div class="mb-3">
+        <label>Тип коробки передач</label>
+        <select class="form-select" asp-for="Input.GearboxTypeId" required>
+            <option selected value="" disabled>-- Выберите тип --</option>
+            <@foreach (var item in Model.DropdownFormData.GearboxTypes)
+            {
+                if (item.Id == Model.FormData.GearboxTypeId)
+                {
+                    <option value="@item.Id" selected>@item.Name</option>
+                }
+                else
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+            }
+        </select>
+        <span asp-validation-for="Input.GearboxTypeId"></span>
+    </div>
+    <div class="mb-3">
+        <label>Вид топлива</label>
+        <select class="form-select" asp-for="Input.FuelTypeId" required>
+            <option selected value="" disabled>-- Выберите вид --</option>
+            @foreach (var item in Model.DropdownFormData.FuelTypes)
+            {
+                if (item.Id == Model.FormData.FuelTypeId)
+                {
+                    <option value="@item.Id" selected>@item.Name</option>
+                }
+                else
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+            }
+        </select>
+        <span asp-validation-for="Input.FuelTypeId"></span>
+    </div>
+    <div class="mb-3">
+        <label>Объем двигателя</label>
+        <input value="@Model.FormData.EngineСapacity" id="engine-capacity-str" class="d-none" />
+        <input class="form-control" value="@Model.FormData.EngineСapacity" type="number" step="0.1" id="engine-capacity" required min="0" value="" max="10" />
+        <input class="form-control d-none" asp-for="Input.EngineСapacity" value="" id="engine-capacity-text" type="text" />
+        <span asp-validation-for="Input.EngineСapacity"></span>
+    </div>
+    <div class="mb-3">
+        <label>Год выпуска</label>
+        <input class="form-control" asp-for="Input.YearOfIssue" value="@Model.FormData.YearOfIssue" required type="number" min="1900" max="9999" />
+        <span asp-validation-for="Input.YearOfIssue"></span>
+    </div>
+    <div class="mb-3">
+        <label>Стоимость за суточную аренду</label>
+        <input class="form-control" asp-for="Input.CostPerDay" value="@Model.FormData.CostPerDay" required type="number" min="1" />
+        <span asp-validation-for="Input.CostPerDay"></span>
+    </div>
+    <div class="mb-3">
+        <label>Залог</label>
+        <input class="form-control" asp-for="Input.Deposit" value="@Model.FormData.Deposit" required type="number" min="0" />
+        <span asp-validation-for="Input.Deposit"></span>
+    </div>
+    <div class="mb-3">
+        <label>Стоимость задержки по времени (за 1 час)</label>
+        <input class="form-control" asp-for="Input.TimeDelayCost" value="@Model.FormData.TimeDelayCost" required type="number" min="0" />
+        <span asp-validation-for="Input.TimeDelayCost"></span>
+    </div>
+    <button class="btn btn-primary" type="submit">Сохранить</button>
+</form>
+<script>
+    var x = $("#engine-capacity-str").val();
+    x = x.replace(",",".");
+    $("#engine-capacity").val(x);
+
+    $("form").submit(function () {
+        var value = $("#engine-capacity").val();
+        var idx = value.indexOf(".");
+        if (idx > 0) {
+            value = value.replace(".", ",");
+        }
+        console.log("idx: " + idx + " value: " + value);
+        $("#engine-capacity-text").val(value);
+        console.log("changed: " + value);
+    });
+</script>
+

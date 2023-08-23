@@ -2,6 +2,7 @@
 {
     public class CarAdminViewDto
     {
+        public int Id { get; set; }
         public string Model { get; set; } = null!;
         public double EngineСapacity { get; set; }
         public int YearOfIssue { get; set; }
