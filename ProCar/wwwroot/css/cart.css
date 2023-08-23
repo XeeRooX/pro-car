@@ -1,0 +1,16 @@
+.two__block_slide__text__name {
+    font-family: 'Tenor Sans', cursive;
+    position: absolute;
+    text-shadow: #000 0px 0 10px; 
+    left: 35px;
+    top: 15px;
+    font-size: 50px;
+    font-weight: 500;
+    line-height: 49px;
+    color: #FFF;
+    z-index: 10;
+}
+
+.img-cart{
+    border-radius: 15px;
+}
