@@ -61,11 +61,11 @@
 
 
 
-                            <div class="col-lg-4 col-md-6 text-center">
+                            <div class="col-lg-4 col-md-6 text-center mt-4">
                                 <a href="/Cars/View/@(car.Id)">
                                     <div class="single-product-item p-0 m-0" style="position:relative">
                                         <h3 class="two__block_slide__text__name">@car.Brand.Name @car.Model</h3>
-                                        <img class="m-0 p-2 img-cart" src="/Data/imgs/autos/1/1.png" alt="">
+                                        <img class="m-0 p-2 img-cart" src="/Data/imgs/cars/@(car.Id)/1.png" alt="">
                                         <div class="product-image p-0 m-0">
                                             <!--	<a href="single-product.html"><img class="m-0 p-0" src="assets/img/products/product-img-1.jpg" alt=""></a> -->
                                         </div>
@@ -84,7 +84,7 @@
                             countCars++;
                             if (countCars >= Model.CountCars)
                             {
-                                <div class="col-lg-4 col-md-6 text-center">
+                                <div class="col-lg-4 col-md-6 text-center mt-4">
                                     <a href="/Cars?cartype=@(item.Id)">
                                         <div class="single-product-item p-0 m-0" style="position:relative">
                                             <img class="m-0 p-2 img-cart" src="~/imgs/right.png" alt="">
