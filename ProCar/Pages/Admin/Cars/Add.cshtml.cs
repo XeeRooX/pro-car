@@ -2,35 +2,43 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProCar.Dtos;
 using ProCar.Services;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProCar.Pages.Admin.Cars
 {
     public class AddModel : PageModel
     {
         private ICarsService _carsService;
+        private IServerUploadService _uploadService;
         public CarAddGetDto FormData { get; set; }
+
         [BindProperty]
         public CarAddDto Input { get; set; }
-        public AddModel(ICarsService carsService)
+        public AddModel(ICarsService carsService, IServerUploadService uploadService)
         {
             _carsService = carsService;
+            _uploadService = uploadService;
         }
         public void OnGet()
         {
             FormData = _carsService.GetDataAddCarsGet();
         }
 
-        public IActionResult OnPost()
+        public IActionResult OnPost(IFormFileCollection photos)
         {
-            if(!ModelState.IsValid)
+
+            if (!ModelState.IsValid)
             {
                 FormData = _carsService.GetDataAddCarsGet();
                 return Page();
             }
-
-            _carsService.AddCar(Input);
             FormData = _carsService.GetDataAddCarsGet();
-            return RedirectToPage("/Admin/Cars/Index");
+
+            Console.WriteLine("Count add -> " + photos.Count);
+            int idCar = _carsService.AddCar(Input);
+            _uploadService.UploadCarPhoto(idCar, photos);
+            
+            return new JsonResult(new { redirectUrl = Url.Page("/Admin/Cars/Index") });
         }
     }
 }

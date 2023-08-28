@@ -12,7 +12,7 @@ namespace ProCar.Services
         {
             _context = context;
         }
-        public void AddCar(CarAddDto carInfo)
+        public int AddCar(CarAddDto carInfo)
         {
             var car = new Car()
 
@@ -31,7 +31,9 @@ namespace ProCar.Services
             };
 
             _context.Cars.Add(car);
+            
             _context.SaveChanges();
+            return car.Id;
         }
 
         public void DeleteCar(int id)

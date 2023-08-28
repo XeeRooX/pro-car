@@ -3,8 +3,21 @@
 @{
     Layout = "_Layout2";
 }
+
+<script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
+<script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
+<link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet" />
+<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+<link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
+      rel="stylesheet" />
+<script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+<link href="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css"
+      rel="stylesheet" />
+<script src="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.js"></script>
+
 <span asp-validation-for="Input"></span>
-<form method="post">
+<form id="uploadform" method="post" enctype="multipart/form-data">
     <div class="mb-3">
         <label>Марка</label>
         <select class="form-select" asp-for="Input.BrandId" required>
@@ -72,11 +85,11 @@
             {
                 if (item.Id == Model.FormData.GearboxTypeId)
                 {
-                    <option value="@item.Id" selected>@item.Name</option>
+                            <option value="@item.Id" selected>@item.Name</option>
                 }
                 else
                 {
-                    <option value="@item.Id">@item.Name</option>
+                            <option value="@item.Id">@item.Name</option>
                 }
             }
         </select>
@@ -127,11 +140,14 @@
         <input class="form-control" asp-for="Input.TimeDelayCost" value="@Model.FormData.TimeDelayCost" required type="number" min="0" />
         <span asp-validation-for="Input.TimeDelayCost"></span>
     </div>
+
+    <input type="file" class="filepond" name="photos" multiple />
+
     <button class="btn btn-primary" type="submit">Сохранить</button>
 </form>
 <script>
     var x = $("#engine-capacity-str").val();
-    x = x.replace(",",".");
+    x = x.replace(",", ".");
     $("#engine-capacity").val(x);
 
     $("form").submit(function () {
@@ -144,5 +160,84 @@
         $("#engine-capacity-text").val(value);
         console.log("changed: " + value);
     });
+
+    //Filepond
+
+    FilePond.registerPlugin(FilePondPluginImagePreview);
+    FilePond.registerPlugin(FilePondPluginFileValidateType);
+
+    FilePond.setOptions({
+        labelIdle: 'Перетащите фото или <span class="filepond--label-action"> загрузите </span>',
+        acceptedFileTypes: ['image/png'],
+        itemInsertLocation: 'after',
+        
+
+    });
+    var api = "/data/imgs/";
+    var str = "@Model.RequestString";
+
+    console.log(str);
+
+    $(document).ready(function (e) {
+        pond = FilePond.create(
+            document.querySelector('.filepond'), {
+            allowMultiple: true,
+            instantUpload: false,
+            allowProcess: false,
+            server: {
+                url: api,
+                process: 'upload-file',
+                revert: null,
+                load: './cars/@Model.RequestString',
+                restore: null,
+                fetch: null
+            },
+            files: [
+    @for (int idx = 1; idx <= Model.CountPhotos; idx++)
+    {
+        string x = Model.RequestString + idx.ToString() + ".png";
+        <text>
+            {
+                        source:'@(idx).png',
+                        options: {
+                        type: 'local'
+                    }
+                            },
+        </text>
+            }
+
+                ]
+
+            });
+
+
+    $("#uploadform").submit(function (e) {
+        e.preventDefault();
+        var formdata = new FormData(this);
+        // append FilePond files into the form data
+        pondFiles = pond.getFiles();
+        for (var i = 0; i < pondFiles.length; i++) {
+            // append the blob file
+            formdata.append('photos', pondFiles[i].file);
+        }
+
+        $.ajax({
+            url: "/Admin/Cars/Edit/@(RouteData.Values["id"])",
+            data: formdata,
+            processData: false,
+            contentType: false,
+            method: "post",
+            success: function (result) {
+                if (result.redirectUrl !== undefined) {
+                    window.location.replace(result.redirectUrl);
+                } else {
+                    // No redirect found, do something else
+                }
+            },
+
+        });
+
+    })
+        });
 </script>
 

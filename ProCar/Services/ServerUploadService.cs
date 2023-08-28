@@ -39,7 +39,8 @@
             
             foreach (var file in files)
             {
-                string fullPath = $"{uploadPath}/{i}{Path.GetExtension(file.FileName)}";
+                //string fullPath = $"{uploadPath}/{i}{Path.GetExtension(file.FileName)}";
+                string fullPath = $"{uploadPath}/{i}.png";
 
                 using (var fileStream = new FileStream(fullPath, FileMode.Create))
                 {
@@ -73,7 +74,7 @@
             {
                 try
                 {
-                    Directory.Delete(deletePath);
+                    Directory.Delete(deletePath, true);
                 }
                 catch (Exception e)
                 {
@@ -93,6 +94,24 @@
             }
             return true;
         }
-        
+
+        public int CountCarPhotos(int id)
+        {
+            var carPath = $"{Directory.GetCurrentDirectory()}/Data/imgs/cars/{id}";
+
+            if (Directory.Exists(carPath))
+            {
+                try
+                {
+                    return Directory.GetFiles(carPath).Length;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("The get info failed: {0}", e.Message);
+                }
+            }
+
+            return 0;
+        }
     }
 }
