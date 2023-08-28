@@ -7,9 +7,11 @@ namespace ProCar.Pages.Admin.Cars
     public class DeleteModel : PageModel
     {
         private ICarsService _carsService;
-        public DeleteModel(ICarsService carsService)
+        private IServerUploadService _uploadService;
+        public DeleteModel(ICarsService carsService, IServerUploadService uploadService)
         {
             _carsService = carsService;
+            _uploadService = uploadService;
         }
         public void OnGet()
         {
@@ -23,6 +25,7 @@ namespace ProCar.Pages.Admin.Cars
             }
 
             _carsService.DeleteCar(id);
+            _uploadService.DeleteCarPhoto(id);
 
             return RedirectToPage("/Admin/Cars/Index");
         }

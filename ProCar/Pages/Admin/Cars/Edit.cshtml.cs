@@ -8,31 +8,34 @@ namespace ProCar.Pages.Admin.Cars
     public class EditModel : PageModel
     {
         private ICarsService _carsService;
+        private IServerUploadService _uploadService;
         public CarAddGetDto DropdownFormData { get; set; }
         public CarEditDto FormData { get; set; }
-
+        public int CountPhotos { get; set; }
+        public string RequestString { get; set; }
         [BindProperty]
         public CarAddDto Input { get; set; }
-        public EditModel(ICarsService carsService)
+        public EditModel(ICarsService carsService, IServerUploadService uploadService)
         {
             _carsService = carsService;
+            _uploadService = uploadService;
         }
         public IActionResult OnGet(int id)
         {
             if (!_carsService.ElementExists(id))
             {
-                Console.WriteLine("!!!!!!!!!!!!!!!!!!!!! "+id.ToString());
                 return NotFound();
             }
 
             DropdownFormData = _carsService.GetDataAddCarsGet();
             FormData = _carsService.GetDataEditCars(id);
-            Console.WriteLine("Id: " + id);
+            CountPhotos = _uploadService.CountCarPhotos(id);
+            RequestString = $"{id}/";
 
             return Page();
         }
 
-        public IActionResult OnPost(int id)
+        public IActionResult OnPost(int id, IFormFileCollection photos)
         {
             if (!_carsService.ElementExists(id))
             {
@@ -46,7 +49,10 @@ namespace ProCar.Pages.Admin.Cars
             }
 
             _carsService.EditCar(Input, id);
-            return RedirectToPage("/Admin/Cars/Index");
+            _uploadService.DeleteCarPhoto(id);
+            _uploadService.UploadCarPhoto(id, photos);
+
+            return new JsonResult(new { redirectUrl = Url.Page("/Admin/Cars/Index") });
         }
     }
 }

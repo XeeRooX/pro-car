@@ -7,5 +7,6 @@
         bool TypeFilePng(IFormFileCollection files);
         void DeleteBrandPhoto(int id);
         void DeleteCarPhoto(int id);
+        int CountCarPhotos(int id);
     }
 }

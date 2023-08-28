@@ -6,7 +6,7 @@ namespace ProCar.Services
     public interface ICarsService
     {
         Car GetById(int id);
-        void AddCar(CarAddDto carInfo);
+        int AddCar(CarAddDto carInfo);
         void EditCar(CarAddDto carInfo, int id);
         void DeleteCar(int id);
         bool ElementExists(int id);
