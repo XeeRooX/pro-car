@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProCar.Dtos;
@@ -5,6 +6,7 @@ using ProCar.Services;
 
 namespace ProCar.Pages.Admin.Cars
 {
+    [Authorize]
     public class EditModel : PageModel
     {
         private ICarsService _carsService;

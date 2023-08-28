@@ -3,6 +3,15 @@
 @{
     Layout = "_Layout2";
 }
+
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Admin/Index">Панель администратора</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a asp-page="/Admin/Cars/Index">Автомобили</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Удалить</li>
+    </ol>
+</nav>
+
 <h2>Вы уверены?</h2>
 <form method="post">
     <input name="id" value="@RouteData.Values["id"]" class="d-none" />

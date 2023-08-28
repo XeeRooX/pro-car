@@ -4,20 +4,26 @@
     Layout = "_Layout2";
 }
 
-<script src="https://unpkg.com/filepond/dist/filepond.min.js"></script>
-<script src="https://unpkg.com/jquery-filepond/filepond.jquery.js"></script>
-<link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet" />
-<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
-<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
-<link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
-      rel="stylesheet" />
-<script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
-<link href="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.css"
-      rel="stylesheet" />
-<script src="https://unpkg.com/filepond-plugin-file-poster/dist/filepond-plugin-file-poster.js"></script>
+<script src="~/js/filepond/filepond.min.js"></script>
+<script src="~/js/filepond/filepond.jquery.js"></script>
+<script src="~/js/filepond/filepond-plugin-file-poster.js"></script>
+<script src="~/js/filepond/filepond-plugin-file-validate-type.js"></script>
+<script src="~/js/filepond/filepond-plugin-image-preview.js"></script>
 
+<link href="~/css/filepond/filepond.css" rel="stylesheet">
+<link href="~/css/filepond/filepond-plugin-image-preview.css" rel="stylesheet">
+<link href="~/css/filepond/filepond-plugin-file-poster.css" rel="stylesheet">
+
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Admin/Index">Панель администратора</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a asp-page="/Admin/Cars/Index">Автомобили</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Редактировать</li>
+    </ol>
+</nav>
+<h2>Редактирование данных об автомобиле</h2>
 <span asp-validation-for="Input"></span>
-<form id="uploadform" method="post" enctype="multipart/form-data">
+<form id="uploadform" method="post" enctype="multipart/form-data" class="mt-3">
     <div class="mb-3">
         <label>Марка</label>
         <select class="form-select" asp-for="Input.BrandId" required>

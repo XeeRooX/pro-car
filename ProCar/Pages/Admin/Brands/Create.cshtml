@@ -4,6 +4,14 @@
     Layout = "_Layout2";
 }
 
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Admin/Index">Панель администратора</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a asp-page="/Admin/Brands/Index">Марки</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Создать</li>
+    </ol>
+</nav>
+
 <p>@Model.Message</p>
 <form method="post" enctype="multipart/form-data">
     <div class="mb-3">

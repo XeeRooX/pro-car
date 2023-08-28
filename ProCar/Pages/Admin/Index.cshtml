@@ -5,6 +5,30 @@
 }
 
 <h2>Действия</h2>
-<a asp-page="/Admin/Brands/Index">Изменение данных о марках</a> <br />
-<a asp-page="/Admin/CarTypes/Index">Изменение данных о типах машин</a> <br /> 
-<a asp-page="/Admin/Cars/Index">Изменение данных о машинах</a> <br />
+<p class="mt-3">
+    На этой странице Вы можете выбрать дальнейшие действия для редактирования данных на сайте
+</p>
+<a class="btn w-100 border border-secondary border-2 p-3 text-start btn-main" asp-page="/Admin/Brands/Index">
+    <span class="me-2">
+        <img src="~/imgs/files.svg">
+    </span> Изменение данных о марках
+</a>
+<br />
+<a class="btn w-100 border border-secondary border-2 p-3 text-start btn-main mt-3" asp-page="/Admin/CarTypes/Index">
+    <span class="me-2">
+        <img src="~/imgs/car-front.svg">
+    </span> Изменение данных о типах машин
+</a>
+<br />
+<a class="btn w-100 border border-secondary border-2 p-3 text-start btn-main mt-3" asp-page="/Admin/Cars/Index">
+    <span class="me-2">
+        <img src="~/imgs/file-text.svg">
+    </span> Изменение данных о машинах
+</a>
+
+
+<style>
+    .btn-main{
+        border-radius: 8px;
+    }
+</style>

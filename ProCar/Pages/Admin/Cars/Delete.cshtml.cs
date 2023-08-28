@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProCar.Services;
 
 namespace ProCar.Pages.Admin.Cars
 {
+    [Authorize]
     public class DeleteModel : PageModel
     {
         private ICarsService _carsService;
