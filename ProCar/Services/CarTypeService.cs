@@ -1,4 +1,5 @@
-﻿using ProCar.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using ProCar.Models;
 
 namespace ProCar.Services
 {
@@ -44,7 +45,12 @@ namespace ProCar.Services
 
         public CarType GetById(int id)
         {
-            return _context.CarTypes.Find(id)!;
+            return _context.CarTypes.Include(a=>a.Cars).ThenInclude(a=>a.GearboxType).FirstOrDefault(a=>a.Id == id)!;
+        }
+
+        public List<CarType> GetTypesNotEmpty()
+        {
+            return _context.CarTypes.Include(a => a.Cars).ThenInclude(a => a.GearboxType).Include(a=>a.Cars).ThenInclude(a=>a.Brand).Where(a=>a.Cars.Count!=0).ToList();
         }
 
         public bool ValueExists(string name)

@@ -1,4 +1,5 @@
-﻿using ProCar.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using ProCar.Models;
 
 namespace ProCar.Services
 {
@@ -35,7 +36,7 @@ namespace ProCar.Services
 
         public Brand GetById(int id)
         {
-            var brand = _context.Brands.Find(id);
+            var brand = _context.Brands.Include(a=>a.Cars).ThenInclude(a=>a.GearboxType).FirstOrDefault(a=>a.Id == id);
             return brand!;
         }
         public bool ElementExists(int id)

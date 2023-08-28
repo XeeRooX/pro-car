@@ -1,0 +1,93 @@
+﻿@page "{id}"
+@model ProCar.Pages.Cars.ViewModel
+@{
+}
+<div class="single-product mt-150 mb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="single-product-img">
+                    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="assets/img/products/product-img-1.jpg" style="object-fit: cover;height: 300px;" class="d-block w-100" alt="">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="assets/img/products/product-img-2.jpg" style="object-fit: cover; height: 300px;" class="d-block w-100" alt="">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="assets/img/products/product-img-3.jpg" style="object-fit: cover; height: 300px;" class="d-block w-100" alt="">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Назад</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Вперёд</span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="single-product-content">
+                    <h3 style=" font-family: 'Tenor Sans', cursive;">@Model.Car.Brand.Name @Model.Car.Model</h3>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th scope="row" class="p-0">Марка</th>
+                                <td class="p-0">@Model.Car.Brand.Name</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="p-0">Модель</th>
+                                <td class="p-0">@Model.Car.Model</td>
+
+                            </tr>
+                            <tr>
+                                <th scope="row" class="p-0">Объём двигателя</th>
+                                <td colspan="2" class="p-0">@Model.Car.EngineСapacity л.</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="p-0">Вид топлива</th>
+                                <td colspan="2" class="p-0">@Model.Car.FuelType.Name</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="p-0">Коробка передач</th>
+                                <td colspan="2" class="p-0">@Model.Car.GearboxType.Name</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="p-0">Привод</th>
+                                <td colspan="2 " class="p-0">@Model.Car.DriveType.Name</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="p-0">Год выпуска</th>
+                                <td colspan="2" class="p-0">@Model.Car.YearOfIssue</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="single-product-pricing m-0">@Model.Car.CostPerDay ₽/сутки</p>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th scope="row" class="p-0">Залог</th>
+                                <td class="p-0">@Model.Car.Deposit₽</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="p-0">Стоимость задержки</th>
+                                <td class="p-0">@Model.Car.TimeDelayCost ₽/час</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="shop.html" style=" font-family: 'Tenor Sans', cursive;"
+                       class="boxed-btn">Забронировать</a>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

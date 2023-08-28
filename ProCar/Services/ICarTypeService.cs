@@ -11,5 +11,6 @@ namespace ProCar.Services
         bool ElementExists(int id);
         bool ValueExists(string name);
         List<CarType> GetAll();
+        List<CarType> GetTypesNotEmpty();
     }
 }

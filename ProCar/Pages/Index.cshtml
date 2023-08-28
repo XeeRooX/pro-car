@@ -4,70 +4,130 @@
     ViewData["Title"] = "Home page";
 }
 
+<style>
+    .top-header-area {
+        background-color: rgba(255, 255, 255, 0);
+        -webkit-transition: 0.3s;
+        -o-transition: 0.3s;
+        transition: 0.3s;
+    }
+</style>
+
+<!-- hero area -->
+<div class="hero-area hero-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 offset-lg-2 text-center">
+                <div class="hero-text">
+                    <div class="hero-text-tablecell">
+
+                        <h1 style="font-family: 'Tenor Sans', cursive;">Аренда автомобилей в Оренбурге</h1>
+                        <div class="hero-btns">
+                            <a href="/Cars" class="boxed-btn">Все автомобили</a>
+                            <!-- <a href="contact.html" class="bordered-btn">Contact Us</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end hero area -->
+<!-- product section -->
+<div class="product-section mt-150 mb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="section-title">
+                    <h3><span class="orange-text">Автомобили</span></h3>
+
+                </div>
+            </div>
+        </div>
+
+        @{
+            int countTypes = 0;
+
+            foreach (var item in Model.CarTypes)
+            {
+                <h3 class="m-0"><span class="orange-text mx-2">@item.Name</span></h3>
+
+                <div class="row py-3">
+                    @{
+                        int countCars = 0;
+                        foreach (var car in item.Cars)
+                        {
 
 
-	<!-- hero area -->
-	<div class="hero-area hero-bg">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-9 offset-lg-2 text-center">
-					<div class="hero-text">
-						<div class="hero-text-tablecell">
-
-							<h1 style="font-family: 'Tenor Sans', cursive;">Аренда автомобилей в Оренбурге</h1>
-							<div class="hero-btns">
-								<a href="shop.html" class="boxed-btn">Все автомобили</a>
-								<!-- <a href="contact.html" class="bordered-btn">Contact Us</a> -->
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- end hero area -->
 
 
-	<!-- product section -->
-	<div class="product-section mt-150 mb-150">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-8 offset-lg-2 text-center">
-					<div class="section-title">
-						<h3><span class="orange-text">Автомобили</span></h3>
-						
-					</div>
-				</div>
-			</div>
-
-			<h3 class="m-0"><span class="orange-text mx-2">Внедорожник</span></h3>
-
-			<div class="row py-3">
-
-				<div class="col-lg-4 col-md-6 text-center">
-					<a href="#">
-						<div class="single-product-item p-0 m-0" style="position:relative">
-							<h3 class="two__block_slide__text__name">BMW X5</h3>
-						<img class="m-0 p-2 img-cart" src="/Data/imgs/autos/1/1.png" alt="">
-							<div class="product-image p-0 m-0">
-								<!--	<a href="single-product.html"><img class="m-0 p-0" src="assets/img/products/product-img-1.jpg" alt=""></a> -->
-							</div>
-							<div class="d-flex">
-								<p
-									class="product-price  d-flex flex-grow-1 align-self-center text-left m-0 bd-highlight px-2">
-									1500 <span
-										class="product-info-price bd-highlight align-self-center px-1">₽/сутки</span>
-								</p>
-								<p class="product-info-price bd-highlight align-self-center px-1 m-0">Автомат | </p>
-								<p class="product-info-price bd-highlight align-self-center m-0 px-2">2019</p>
-							</div>
-						</div>
-					</a>
-				</div>
-				
-			</div>
+                            <div class="col-lg-4 col-md-6 text-center">
+                                <a href="/Cars/View/@(car.Id)">
+                                    <div class="single-product-item p-0 m-0" style="position:relative">
+                                        <h3 class="two__block_slide__text__name">@car.Brand.Name @car.Model</h3>
+                                        <img class="m-0 p-2 img-cart" src="/Data/imgs/autos/1/1.png" alt="">
+                                        <div class="product-image p-0 m-0">
+                                            <!--	<a href="single-product.html"><img class="m-0 p-0" src="assets/img/products/product-img-1.jpg" alt=""></a> -->
+                                        </div>
+                                        <div class="d-flex">
+                                            <p class="product-price  d-flex flex-grow-1 align-self-center text-left m-0 bd-highlight px-2">
+                                                @car.CostPerDay <span class="product-info-price bd-highlight align-self-center px-1">₽/сутки</span>
+                                            </p>
+                                            <p class="product-info-price bd-highlight align-self-center px-1 m-0">@car.GearboxType.Name | </p>
+                                            <p class="product-info-price bd-highlight align-self-center m-0 px-2">@car.YearOfIssue</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
 
 
-		</div>
-	</div>
-	<!-- end product section -->
+                            countCars++;
+                            if (countCars >= Model.CountCars)
+                            {
+                                <div class="col-lg-4 col-md-6 text-center">
+                                    <a href="/Cars?cartype=@(item.Id)">
+                                        <div class="single-product-item p-0 m-0" style="position:relative">
+                                            <img class="m-0 p-2 img-cart" src="~/imgs/right.png" alt="">
+
+                                            <div class="product-image p-0 m-0">
+                                                <!--	<a href="single-product.html"><img class="m-0 p-0" src="assets/img/products/product-img-1.jpg" alt=""></a> -->
+                                            </div>
+                                            <div class="d-flex">
+                                               
+                                                <p class="product-info-price d-flex flex-grow-1 align-self-center text-left m-0 bd-highlight px-2">
+                                                    Больше автомобилей
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+
+                                break;
+                            }
+                        }
+
+                    }
+                </div>
+
+
+
+                if (countTypes >= Model.CountTypes)
+                {
+                    break;
+                }
+
+
+
+            }
+
+        }
+
+
+
+
+
+    </div>
+</div>
+<!-- end product section -->

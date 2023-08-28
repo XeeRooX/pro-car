@@ -2,3 +2,124 @@
 @model ProCar.Pages.Cars.IndexModel
 @{
 }
+
+<!-- products -->
+<div class="product-section mt-150 mb-150">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="m-0"><span class="orange-text mx-2" style="font-family: 'Tenor Sans', cursive;">Бренды</span></h3>
+
+                <div class="product-filters-brand m-0">
+                    <ul>
+                        @{
+                            if (Model.BrandId == 0)
+                            {
+                                    <a href="/Cars">
+                                    <li class="active" class="m-0">Все</li></a>
+                            }
+                            else
+                            {
+                                    <a href="/Cars">
+                                    <li class="" class="m-0">Все</li></a>
+                            }
+                        }
+
+
+                        @{
+                            foreach (var item in Model.Brands)
+                            {
+                                if (item.Id == Model.BrandId)
+                                {
+                                        <a asp-page="/Cars/Index" asp-route-brand="@item.Id">
+                                        <li class="px-2 active" class="m-0"><img src="Data/imgs/brands/@(item.Id).png" width="50"></li></a>
+                                }
+                                else
+                                {
+                                        <a asp-page="/Cars/Index" asp-route-brand="@item.Id">
+                                        <li class="px-2" class="m-0"><img src="Data/imgs/brands/@(item.Id).png" width="50"></li></a>
+                                }
+
+                            }
+                        }
+                    </ul>
+                </div>
+                <h3 class="m-0"><span class="orange-text mx-2" style="font-family: 'Tenor Sans', cursive;">Типы кузова</span></h3>
+                <div class="product-filters m-0">
+                    <ul>
+
+                        @{
+                            if (Model.CarTypeId == 0)
+                            {
+                                    <a href="/Cars">
+                                    <li class="active" class="m-0">Все</li></a>
+                            }
+                            else
+                            {
+                                    <a href="/Cars">
+                                    <li class="" class="m-0">Все</li></a>
+                            }
+                        }
+
+
+
+                        @{
+                            foreach (var item in Model.CarTypes)
+                            {
+                                if (item.Id == Model.CarTypeId)
+                                {
+                                        <a asp-page="/Cars/Index" asp-route-cartype="@item.Id">
+                                        <li class="m-0 type-2 active">@item.Name</li></a>
+                                }
+                                else
+                                {
+
+                                        <a asp-page="/Cars/Index" asp-route-cartype="@item.Id">
+                                        <li class="m-0 type-2">@item.Name</li></a>
+                                }
+
+                            }
+                        }
+                    </ul>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="row product-lists">
+
+            @{
+                foreach (var item in Model.Cars)
+                {
+
+                        <div class="col-lg-4 col-md-6 text-center">
+                            <a href="/Cars/@(item.Id)">
+                                <div class="single-product-item p-0 m-0" style="position:relative">
+                                    <h3 class="two__block_slide__text__name">@item.Brand.Name @item.Model</h3>
+                                    <img class="m-0 p-2 img-cart" src="/Data/imgs/autos/@(item.Id)/1.png" alt="">
+                                    <div class="product-image p-0 m-0">
+                                        <!--	<a href="single-product.html"><img class="m-0 p-0" src="assets/img/products/product-img-1.jpg" alt=""></a> -->
+                                    </div>
+                                    <div class="d-flex">
+                                        <p class="product-price  d-flex flex-grow-1 align-self-center text-left m-0 bd-highlight px-2">
+                                            @item.CostPerDay <span class="product-info-price bd-highlight align-self-center px-1">₽/сутки</span>
+                                        </p>
+                                        <p class="product-info-price bd-highlight align-self-center px-1 m-0">@item.GearboxType.Name | </p>
+                                        <p class="product-info-price bd-highlight align-self-center m-0 px-2">@item.YearOfIssue</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+
+                }
+            }
+
+
+
+
+        </div>
+    </div>
+    <!-- end products -->

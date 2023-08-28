@@ -51,7 +51,7 @@ namespace ProCar.Services
             car.Deposit = carInfo.Deposit;
             car.TimeDelayCost = carInfo.TimeDelayCost;
             car.CarType = _context.CarTypes.Find(carInfo.CarTypeId)!;
-            car.DriveType = _context.DriveTypes.Find(carInfo.DriveTypeId)!;  
+            car.DriveType = _context.DriveTypes.Find(carInfo.DriveTypeId)!;
             car.GearboxType = _context.GearboxTypes.Find(carInfo.GearboxTypeId)!;
             car.FuelType = _context.FuelTypes.Find(carInfo.FuelTypeId)!;
             car.Brand = _context.Brands.Find(carInfo.BrandId)!;
@@ -73,11 +73,11 @@ namespace ProCar.Services
         {
             List<CarAdminViewDto> resultCars = new();
             var cars = _context.Cars.
-                Include(c=>c.CarType).
-                Include(c=>c.DriveType).
-                Include(c=>c.GearboxType).
-                Include(c=>c.FuelType).
-                Include(c=>c.Brand);
+                Include(c => c.CarType).
+                Include(c => c.DriveType).
+                Include(c => c.GearboxType).
+                Include(c => c.FuelType).
+                Include(c => c.Brand);
 
             foreach (Car car in cars)
             {
@@ -103,12 +103,12 @@ namespace ProCar.Services
 
         public Car GetById(int id)
         {
-            return _context.Cars.Find(id)!;
+            return _context.Cars.Include(a => a.Brand).Include(a => a.FuelType).Include(a => a.GearboxType).Include(a => a.CarType).Include(a=>a.DriveType).FirstOrDefault(a => a.Id == id)!;
         }
 
         public CarAddGetDto GetDataAddCarsGet()
         {
-            CarAddGetDto result = new() 
+            CarAddGetDto result = new()
             {
                 Brands = _context.Brands.ToList(),
                 CarTypes = _context.CarTypes.ToList(),

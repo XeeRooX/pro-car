@@ -1,57 +1,4 @@
-﻿@*<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ProCar</title>
-    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/ProCar.styles.css" asp-append-version="true" />
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">ProCar</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - ProCar - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer>
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
-</html>
-
-*@
-
+﻿
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -93,14 +40,7 @@
 
 
 </head>
-<style>
-	.top-header-area {
-		background-color: rgba(255, 255, 255, 0);
-		-webkit-transition: 0.3s;
-		-o-transition: 0.3s;
-		transition: 0.3s;
-	}
-</style>
+
 <body>
 
 	<!--PreLoader-->
@@ -117,26 +57,27 @@
 				<div class="col-lg-12 col-sm-12 text-center">
 					<div class="main-menu-wrap">
 						<!-- logo -->
-						<div class="site-logo">
-							<a href="index.html">
-								<img src="assets/img/logo.png" alt="">
+						<div class="site-logo py-1">
+							<a href="/">
+
+								<img width="100px" src="~/imgs/logo.png" alt="">
 							</a>
 						</div>
 						<!-- logo -->
 						<!-- menu start -->
 						<nav class="main-menu">
 							<ul>
-								<li class="current-list-item">
-									<a href="#">Главная</a>
+								<li class="">
+									<a href="/">Главная</a>
 								</li>
-								<li><a href="about.html">Автопарк</a></li>
+								<li><a href="/Cars">Автопарк</a></li>
 								<li>
-									<a href="news.html">Контакты</a>
+									<a href="/Contact">Контакты</a>
 								</li>
-								<li><a href="contact.html">О компании</a></li>
+								<li><a href="/Conditions">Условия</a></li>
 								<li>
 									<div class="header-icons">
-										<a class="mobile-hide" href="#"><i class="fas "></i>+7 5456 45-45</a>
+										<a class="mobile-hide" href="tel:+754564545"><i class="fas "></i>+7 5456 45-45</a>
 									</div>
 								</li>
 							</ul>
@@ -172,8 +113,8 @@
 						<h2 class="widget-title">Как нас найти</h2>
 						<ul>
 							<li>193А, Одесская, Оренбург</li>
-							<li>support@procar.com</li>
-							<li>+7 800 55 35-35</li>
+							<li><a href="mailto:support@procar.com">support@procar.com</a></li>
+							<li><a href="tel:+754564545">+7 800 55 35-35</a></li>
 						</ul>
 					</div>
 				</div>
@@ -183,11 +124,10 @@
 						<p></p>
 						<div class="social-icons">
 							<ul>
-								<li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-								<li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
+								<li><a href="#" target="_blank"><i class="fab fa-telegram"></i></a></li>
 								<li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
-								<li><a href="#" target="_blank"><i class="fab fa-linkedin"></i></a></li>
-								<li><a href="#" target="_blank"><i class="fab fa-dribbble"></i></a></li>
+								<li><a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a></li>
+								<li><a href="#" target="_blank"><i class="fab fa-viber"></i></a></li>
 							</ul>
 						</div>
 					</div>
