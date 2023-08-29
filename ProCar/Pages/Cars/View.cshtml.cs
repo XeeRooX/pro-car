@@ -17,10 +17,15 @@ namespace ProCar.Pages.Cars
             _carsService = carsService;
             _uploadService = uploadService;
         }
-        public void OnGet(int id)
+        public IActionResult OnGet(int id)
         {
             Car = _carsService.GetById(id);
+            if(Car == null)
+            {
+                return NotFound();
+            }
             CountPhoto = _uploadService.CountCarPhotos(id);
+            return Page();
         }
     }
 }
