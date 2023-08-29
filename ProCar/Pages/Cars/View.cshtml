@@ -21,7 +21,7 @@
                                     else
                                     {
                                             <div class="carousel-item">
-                                            <img src="/Data/imgs/cars/@(Model.Car.Id)/@(i).png" style="object-fit: cover; aspect-ratio:4/3; background-color:white " class="d-block w-100" alt="">
+                                                <img src="/Data/imgs/cars/@(Model.Car.Id)/@(i).png" style="object-fit: cover; aspect-ratio:4/3; background-color:white " class="d-block w-100" alt="">
                                             </div>
                                     }
 
@@ -90,8 +90,8 @@
                             </tr>
                         </tbody>
                     </table>
-                    <a href="shop.html" style=" font-family: 'Tenor Sans', cursive;"
-                       class="boxed-btn">Забронировать</a>
+                    <a class="boxed-btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Забронировать</a>
+
                 </div>
 
 
@@ -100,3 +100,70 @@
         </div>
     </div>
 </div>
+
+
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasRightLabel">Забронировать @Model.Car.Brand.Name @Model.Car.Model</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="card-body">
+            <div class="billing-address-form">
+                <form action="index.html">
+                    <p><input type="text" placeholder="Как к Вам обращаться" required></p>
+                    <p class="m-0">Забронировать от</p>
+                    <p><input id="startDate" class="form-control " type="date" required /></p>
+
+                    <p class="m-0">Забронировать до</p>
+                    <p><input id="endDate" class="form-control " type="date" required /></p>
+
+                    <p><input type="tel" id="phone" placeholder="Номер телефона" required></p>
+
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" required>
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Я согласен на обработку<a class="" type="" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight2" aria-controls="offcanvasRight2"> персональных данных</a>
+                            
+                        </label>
+                    </div>
+                    <button class="btn boxed-btn m-0">Забронировать</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight2" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasRightLabel">Согласие на обработку персональных данных</h5>
+        <button class="btn-close" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"></button>
+
+    </div>
+    <div class="offcanvas-body">
+        Настоящим в соответствии с Федеральным законом № 152-ФЗ «О персональных данных» от 27.07.2006 года свободно, своей волей и в своем интересе выражаю свое безусловное согласие на обработку моих персональных данных администратором доменного имени сайта proauto.ru (далее Оператор), при этом:
+        - подтверждаю, что все указанные мною в полях формы данные принадлежат лично мне;
+        - даю согласие на обработку оператором предоставляемых мной персональных данных без оговорок и ограничений, в том числе на передачу персональных данных оператором третьим лицам, с которыми у оператора имеются договорные отношения;
+        - подтверждаю, что, давая такое согласие, я действую свободно, своей волей и в своем интересе. Мое согласие Пользователя на обработку персональных данных является конкретным, информированным и сознательным.
+        Я предоставляю Оператору право осуществлять следующие действия (операции) с персональными данными: сбор, накопление, хранение, уточнение (обновление, изменение), использование, уничтожение, обезличивание, передача по требованию суда, в т.ч. третьим лицам, с соблюдением мер, обеспечивающих защиту персональных данных от несанкционированного доступа.
+        Файлы cookie, передаваемые Оператором оборудованию Пользователя и оборудованием Пользователя Оператору, могут использоваться Оператором для предоставления Пользователю персонализированных интернет-сервисов, для таргетирования рекламы, которая показывается Пользователю, в статистических и исследовательских целях, а также для улучшения сервисов Оператора.
+        Пользователь осознает, что оборудование и программное обеспечение, используемые им для посещения сайтов в сети интернет могут обладать функцией запрещения операций с файлами cookie (для любых сайтов или для определенных сайтов), а также удаления ранее полученных файлов cookie.
+        Структура файла cookie, его содержание и технические параметры определяются Оператором и могут изменяться без предварительного уведомления Пользователя. Согласие действует в течение неопределенного срока до момента отзыва мной. Согласие может быть отозвано мной путем направления соответствующего распоряжения в простой письменной форме на эл.адрес support@proauto.ru
+    </div>
+</div>
+<script>
+    var phoneInput = document.getElementById('phone');
+    var myForm = document.forms.myForm;
+    var result = document.getElementById('result');  // only for debugging purposes
+
+    phoneInput.addEventListener('input', function (e) {
+        var x = e.target.value.replace("+7 ", "").replace("+7", "").replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+        e.target.value = "+7 ";
+        var text = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+        e.target.value += text;
+    });
+
+</script>
