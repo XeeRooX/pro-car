@@ -20,6 +20,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddScoped<ICarTypeService, CarTypeService>();
 builder.Services.AddScoped<ICarsService, CarsService>();
+builder.Services.AddSingleton<IBotMessageService, BotMessageService>();
 
 builder.Services.AddScoped<IServerUploadService, ServerUploadService>();
 
