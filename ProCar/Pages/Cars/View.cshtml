@@ -111,15 +111,16 @@
     <div class="offcanvas-body">
         <div class="card-body">
             <div class="billing-address-form">
-                <form action="index.html">
-                    <p><input type="text" placeholder="Как к Вам обращаться" required></p>
+                <form action="" method="post">
+                    <input value="@Model.Car.Id" class="d-none" name="id"/>
+                    <p><input type="text" placeholder="Как к Вам обращаться" name="name" required></p>
                     <p class="m-0">Забронировать от</p>
-                    <p><input id="startDate" class="form-control " type="date" required /></p>
+                    <p><input id="startDate" class="form-control " name="rentFrom" type="date" required /></p>
 
                     <p class="m-0">Забронировать до</p>
-                    <p><input id="endDate" class="form-control " type="date" required /></p>
+                    <p><input id="endDate" class="form-control " name="rentBefore" type="date" required /></p>
 
-                    <p><input type="tel" id="phone" placeholder="Номер телефона" required></p>
+                    <p><input type="tel" id="phone" name="phone" placeholder="Номер телефона" required></p>
 
 
                     <div class="form-check">
@@ -129,7 +130,7 @@
                             
                         </label>
                     </div>
-                    <button class="btn boxed-btn m-0">Забронировать</button>
+                    <button type="submit" class="btn boxed-btn m-0">Забронировать</button>
                 </form>
             </div>
         </div>
