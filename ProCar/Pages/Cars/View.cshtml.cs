@@ -38,13 +38,11 @@ namespace ProCar.Pages.Cars
         {
             var car = _carsService.GetById(model.Id);
             var hostname = _configuration.GetValue<string>("ServerSecrets:Hostname");
-
-            var carUrl = new Telegram.Bot.Types.ReplyMarkups.InlineKeyboardMarkup(Telegram.Bot.Types.ReplyMarkups.InlineKeyboardButton.WithUrl("Ссылка на автомобиль", "https://{hostname}/Cars/View/{model.Id}"));
             StringBuilder message = new StringBuilder("❗Новая заявка❗\n");
             message.AppendLine($"Информация об автомобиле 🚗");
             message.AppendLine($"{car.Brand.Name} {car.Model}");
-            message.AppendLine($"🔗 {carUrl}");
-            message.AppendLine($"\U0001f9d1Информация о клиенте");
+            message.AppendLine($"🔗 Ссылка на автомобиль: https://{hostname}/Cars/View/{model.Id}/");
+            message.AppendLine($"\n\U0001f9d1 Информация о клиенте");
             message.AppendLine($"📃 Имя: {model.Name}");
             message.AppendLine($"📞 Номер телефона: {model.Phone}");
             message.AppendLine($"📆 Аренда от: {model.RentFrom}");

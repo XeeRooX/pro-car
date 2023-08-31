@@ -20,7 +20,7 @@ namespace ProCar.Services
             }
 
             var api = new TelegramBotClient(token);
-            await api.SendTextMessageAsync(chatId, message);
+            await api.SendTextMessageAsync(chatId, message, parseMode: Telegram.Bot.Types.Enums.ParseMode.Html);
         }
     }
 }
