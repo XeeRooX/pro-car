@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProCar.Services;
 using ProCar.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ProCar.Pages.Cars
 {
@@ -27,5 +28,21 @@ namespace ProCar.Pages.Cars
             CountPhoto = _uploadService.CountCarPhotos(id);
             return Page();
         }
+
+        public IActionResult OnPost(InputModel model)
+        {
+
+            return Page();
+        }
+        public class InputModel
+        {
+            public int Id { get; set; }
+            public string Name { get; set; } = null!;
+            public string RentFrom { get; set; } = null!;
+            public string RentBefore { get; set; } = null!;
+            public string Phone { get; set; } = null!;
+
+        }
     }
+    
 }
