@@ -12,13 +12,15 @@ namespace ProCar.Services
         public async Task Send(string message)
         {
             string token = _conf.GetValue<string>("BotSettings:Token");
-            if (token == null)
+            string chatId = _conf.GetValue<string>("BotSettings:ChatId");
+
+            if (token == null || chatId == null)
             {
                 return;
             }
 
             var api = new TelegramBotClient(token);
-            await api.SendTextMessageAsync("-1001901156015", message);
+            await api.SendTextMessageAsync(chatId, message);
         }
     }
 }
