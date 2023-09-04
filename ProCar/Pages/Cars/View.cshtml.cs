@@ -5,6 +5,7 @@ using ProCar.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Text;
 using Microsoft.EntityFrameworkCore.Migrations;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProCar.Pages.Cars
 {
@@ -15,6 +16,7 @@ namespace ProCar.Pages.Cars
         private readonly IConfiguration _configuration;
         private readonly IBotMessageService _botMessage;
         public Car Car { get; set; } = new();
+        public bool IsConfirmed { get; set; }
         public int CountPhoto { get; set; }
         public ViewModel(ICarsService carsService, IServerUploadService uploadService, IConfiguration configuration, IBotMessageService botMessage)
         {
@@ -25,6 +27,8 @@ namespace ProCar.Pages.Cars
         }
         public IActionResult OnGet(int id)
         {
+            Console.WriteLine("111");
+
             Car = _carsService.GetById(id);
             if(Car == null)
             {
@@ -36,6 +40,14 @@ namespace ProCar.Pages.Cars
 
         public IActionResult OnPost(InputModel model)
         {
+            Car = _carsService.GetById(model.Id);
+            if (Car == null)
+            {
+                return NotFound();
+            }
+            CountPhoto = _uploadService.CountCarPhotos(model.Id);
+            IsConfirmed = true;
+
             var car = _carsService.GetById(model.Id);
             var hostname = _configuration.GetValue<string>("ServerSecrets:Hostname");
             StringBuilder message = new StringBuilder("❗Новая заявка❗\n");
@@ -49,11 +61,13 @@ namespace ProCar.Pages.Cars
             message.AppendLine($"📆 Аренда до: {model.RentBefore}");
             _botMessage.Send(message.ToString());
 
+            //return RedirectToPage($"/Cars/View/{model.Id}");
             return Page();
         }
         public class InputModel
         {
             public int Id { get; set; }
+            [StringLength(50)]
             public string Name { get; set; } = null!;
             public string RentFrom { get; set; } = null!;
             public string RentBefore { get; set; } = null!;
