@@ -1,0 +1,31 @@
+version: '3.4'
+
+volumes:
+  datafiles:
+
+services:
+  procar:
+    image: ${DOCKER_REGISTRY-}procar
+    build:
+      context: .
+      dockerfile: ProCar/Dockerfile
+    depends_on:
+      - db
+    restart: always
+    environment:
+      ConnectionStrings__DefaultConnection: "server=db;port=3306;user=newuser;database=mydb;password=password;"
+
+  db:
+    image: mysql:8.0.33
+    #Map port 3306 on the mysql container to port 3306 in the host
+    ports:
+      - "3306:3306"
+    #Specify where the persisted Data should be stored
+    volumes:
+      - datafiles:/var/lib/mysql
+    restart: always
+    environment: 
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_USER: newuser
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: mydb
