@@ -17,7 +17,7 @@
     <div class="mb-3">
         <input class="d-none" value="@Model.Brand.Id" name="id"/>
         <label for="Name" class="form-label">Название</label>
-        <input type="text" name="name" class="form-control" value="@Model.Brand.Name" id="Name" aria-describedby="emailHelp" required>
+        <input type="text" name="name" class="form-control" value="@Model.Brand.Name" maxlength="25" id="Name" aria-describedby="emailHelp" required>
     </div>
      <div class="mb-3">
   <label for="formFile" class="form-label">Загрузите новое фото фото бренда</label>
