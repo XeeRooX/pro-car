@@ -12,9 +12,9 @@ builder.Services.AddRazorPages();
 
 
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connectionString));
+//builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connectionString));
 //new MySqlServerVersion(new Version())
-//builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(connectionString, new MySqlServerVersion(new Version(8,0,33))));
+builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(connectionString, new MySqlServerVersion(new Version(8,0,33))));
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => options.LoginPath = "/admin/login");
 builder.Services.AddAuthorization();
