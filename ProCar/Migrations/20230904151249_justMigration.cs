@@ -3,13 +3,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace ProCar.Migrations
-{
-<<<<<<<< HEAD:ProCar/Migrations/20230904151249_justMigration.cs
+namespace ProCar.Migrations { 
+
     public partial class justMigration : Migration
-========
-    public partial class iniValue : Migration
->>>>>>>> ab2f6cd9674b79ee016c62718e0411cbff138f75:ProCar/Migrations/20230904151308_iniValue.cs
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

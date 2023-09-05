@@ -10,13 +10,7 @@ using ProCar.Models;
 namespace ProCar.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-<<<<<<<< HEAD:ProCar/Migrations/20230904151249_justMigration.Designer.cs
-    [Migration("20230904151249_justMigration")]
     partial class justMigration
-========
-    [Migration("20230904151308_iniValue")]
-    partial class iniValue
->>>>>>>> ab2f6cd9674b79ee016c62718e0411cbff138f75:ProCar/Migrations/20230904151308_iniValue.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
