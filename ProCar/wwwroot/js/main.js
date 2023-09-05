@@ -139,9 +139,12 @@
 
 
         // stikcy js
-        $("#sticker").sticky({
-            topSpacing: 0
+        var ct = $("#sticker").sticky({
+            topSpacing: 0,
+            listen: true
+          
         });
+        
 
         //mean menu
         //$('.main-menu').meanmenu({

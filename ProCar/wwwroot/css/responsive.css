@@ -1,5 +1,15 @@
 /* Medium Layout: 1280px. */
 @media only screen and (min-width: 992px) {
+	.sticky-wrapper.is-sticky .top-header-area {
+		height: 80px;
+		background-color: black;
+		padding: 5px 0;
+	}
+
+	.top-header-area {
+		
+		padding: 18px 0;
+	}
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) { 
@@ -123,7 +133,7 @@
 	    text-align: center;
 	}
 	.top-header-area {
-	    padding: 15px 0;
+	    padding: 25px 0;
 	}
 
 	.responsive-menu-wrap {
@@ -157,8 +167,13 @@
 	}
 
 	.sticky-wrapper.is-sticky .top-header-area {
-	    position: absolute!important;
-	    background-color: transparent;
+		/*position: absolute !important;*/
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		z-index: 999 !important;
+		background-color: #000000;
 	}
 	.featured-box {
 	    padding: 30px;
@@ -408,9 +423,15 @@
 	}
 
 	.sticky-wrapper.is-sticky .top-header-area {
-	    position: absolute!important;
-	    background-color: transparent;
-	    padding: 25px 0;
+		/*position: absolute!important;*/
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		z-index: 999 !important;
+
+		background-color: #000000;
+		/*padding: 25px 0;*/
 	}
 	.featured-box {
 	    padding: 0 45px;
@@ -555,6 +576,10 @@
 	    top: 22px;
 	    z-index: 999;
 	    color: #fff;
+	}
+
+	.top-header-area {
+		padding: 25px 0;
 	}
 }
 /* Wide Mobile Layout: 480px. */
