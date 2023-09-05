@@ -2,8 +2,15 @@
 @model ProCar.Pages.Cars.ViewModel
 @{
 }
+
+
 <div class="single-product mt-150 mb-150">
     <div class="container">
+        @if (Model.IsConfirmed)
+        {
+            <h2>Заявка оформлена</h2>
+        }
+
         <div class="row">
             <div class="col-md-7">
                 <div class="single-product-img mt-3">
@@ -113,7 +120,7 @@
             <div class="billing-address-form">
                 <form action="" method="post">
                     <input value="@Model.Car.Id" class="d-none" name="id"/>
-                    <p><input type="text" placeholder="Как к Вам обращаться" name="name" required></p>
+                    <p><input type="text" placeholder="Как к Вам обращаться" name="name" required maxlength="50"></p>
                     <p class="m-0">Забронировать от</p>
                     <p><input id="startDate" class="form-control " name="rentFrom" type="date" required /></p>
 
