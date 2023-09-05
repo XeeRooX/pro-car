@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <Folder Include="Data\imgs\brands\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

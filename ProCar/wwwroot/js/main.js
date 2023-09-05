@@ -144,10 +144,12 @@
         });
 
         //mean menu
-        $('.main-menu').meanmenu({
-            meanMenuContainer: '.mobile-menu',
-            meanScreenWidth: "992"
-        });
+        //$('.main-menu').meanmenu({
+        //    meanMenuContainer: '.mobile-menu',
+        //    meanScreenWidth: "992",
+        //    meanMenuOpen: "<span><span><span></span></span></span><span><span><span></span></span></span><span><span><span></span></span></span>"
+        //});
+       //
 
         //// search form
         //$(".search-bar-icon").on("click", function () {

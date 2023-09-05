@@ -33,7 +33,7 @@ namespace ProCar.Models
                 new FuelType() { Id = 2, Name = "дизель"},
                 new FuelType() { Id = 3, Name = "электричество"},
                 new FuelType() { Id = 4, Name = "пропан"},
-                new FuelType() { Id = 4, Name = "метан"}
+                new FuelType() { Id = 5, Name = "метан"}
                 );
         }
     }

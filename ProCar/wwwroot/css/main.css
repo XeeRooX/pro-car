@@ -646,6 +646,7 @@ ul.sub-menu li:last-child {
 
 .mean-container a.meanmenu-reveal {
     color: #051922;
+    border-radius: 5px;
 }
 
     .mean-container a.meanmenu-reveal span {

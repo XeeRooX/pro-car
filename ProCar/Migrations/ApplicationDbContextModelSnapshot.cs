@@ -114,6 +114,23 @@ namespace ProCar.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DriveTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "передний"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "полный"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "задний"
+                        });
                 });
 
             modelBuilder.Entity("ProCar.Models.FuelType", b =>
@@ -129,6 +146,33 @@ namespace ProCar.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("FuelTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "бензин"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "дизель"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "электричество"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "пропан"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "метан"
+                        });
                 });
 
             modelBuilder.Entity("ProCar.Models.GearboxType", b =>
@@ -144,6 +188,28 @@ namespace ProCar.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("GearboxTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "механическая"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "автомат"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "вариатор"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "робот"
+                        });
                 });
 
             modelBuilder.Entity("ProCar.Models.Car", b =>

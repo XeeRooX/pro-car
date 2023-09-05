@@ -4,7 +4,7 @@
 
 namespace ProCar.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class iniValue : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -125,6 +125,66 @@ namespace ProCar.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "DriveTypes",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 1, "передний" });
+
+            migrationBuilder.InsertData(
+                table: "DriveTypes",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 2, "полный" });
+
+            migrationBuilder.InsertData(
+                table: "DriveTypes",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 3, "задний" });
+
+            migrationBuilder.InsertData(
+                table: "FuelTypes",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 1, "бензин" });
+
+            migrationBuilder.InsertData(
+                table: "FuelTypes",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 2, "дизель" });
+
+            migrationBuilder.InsertData(
+                table: "FuelTypes",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 3, "электричество" });
+
+            migrationBuilder.InsertData(
+                table: "FuelTypes",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 4, "пропан" });
+
+            migrationBuilder.InsertData(
+                table: "FuelTypes",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 5, "метан" });
+
+            migrationBuilder.InsertData(
+                table: "GearboxTypes",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 1, "механическая" });
+
+            migrationBuilder.InsertData(
+                table: "GearboxTypes",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 2, "автомат" });
+
+            migrationBuilder.InsertData(
+                table: "GearboxTypes",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 3, "вариатор" });
+
+            migrationBuilder.InsertData(
+                table: "GearboxTypes",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 4, "робот" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cars_BrandId",
