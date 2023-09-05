@@ -57,24 +57,20 @@
         .mobile-style li{
             text-align: left;
             font-family: 'Tenor Sans', cursive;
-
         }
 
-            .mobile-style a {
-                font-size: 1.2rem;
-            }
-
-            .mobile-style a:link{
-                color: #fff;
-        }
-
-        .mobile-style a:visited {
+        .mobile-style a {
+            font-size: 1.2rem;
             color: #fff;
         }
 
         .mobile-style img{         
-                width: 1.5rem;
-                height: 1.5rem;
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        .footer-area h2, p, li{
+            font-family: 'Tenor Sans', cursive;
         }
     </style>
 </head>
@@ -121,12 +117,12 @@
                             </ul>
                         </nav>
 
-                        <div class="d-block d-md-block d-lg-none">
-                            <button class="nav-link px-3 text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+                        <div class="d-block d-md-block d-lg-none ms-auto me-0">
+                            <button class="nav-link px-3 text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRightNavbar" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
                                 <img src="~/imgs/list.svg" width="35"/>
                             </button>
 
-                            <div class="offcanvas offcanvas-end mobile-style" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                            <div class="offcanvas offcanvas-end mobile-style" tabindex="-1" id="offcanvasRightNavbar" aria-labelledby="offcanvasRightLabel">
                                 <div class="offcanvas-header">
                                     <h5 class="offcanvas-title ms-3"><img src="~/imgs/logo-wt.png" style="width: 35px; height: 35px;"/> Меню</h5>
                                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -166,7 +162,7 @@
     <div class="footer-area mt-4" style="padding: 70px">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-6 col-md-6">
                     <div class="footer-box about-widget">
                         <h2 class="widget-title">О нас</h2>
                         <p>Про Авто - это компания, которая предлагает вам удобный и выгодный способ аренды автомобилей в Оренбурге. Вы можете выбрать любой автомобиль из широкого ассортимента, оставить заявку и получить машину. Про Авто - это надежный партнер для вашего комфортного и безопасного передвижения.</p>
@@ -182,7 +178,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-2 col-md-6">
                     <div class="footer-box subscribe">
                         <h2 class="widget-title">Наши соцсети</h2>
                         <p></p>

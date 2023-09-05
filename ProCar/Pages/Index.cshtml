@@ -12,7 +12,7 @@
         transition: 0.3s;
     }
 
-    .all-cars-btn{
+    .all-cars-btn {
         border-radius: 12px;
         background-color: #ff914d;
         color: white;
@@ -20,25 +20,24 @@
         font-size: 18px;
     }
 
-    .all-cars-btn:hover {
-        border-radius: 12px;
-        background-color: #cc743d;
-        color: white;
-        
-    }
+        .all-cars-btn:hover {
+            border-radius: 12px;
+            background-color: #cc743d;
+            color: white;
+        }
 
-    .all-cars-btn:active {
-        border-radius: 12px;
-        background-color: #cc743d;
-        color: white;
-    }
+        .all-cars-btn:active {
+            border-radius: 12px;
+            background-color: #cc743d;
+            color: white;
+        }
 
     .btn:first-child:active {
         border-radius: 12px;
         background-color: #cc743d;
         color: white;
+    }
 
-   }
 </style>
 
 <!-- hero area -->
@@ -51,11 +50,9 @@
 
                         <h1 style="font-family: 'Tenor Sans', cursive;">Аренда автомобилей в Оренбурге</h1>
                         <div class="hero-btns">
-                            <a href="/Cars" class="boxed-btn">
-                                <span><img /></span>
+                            <a href="/Cars" class="boxed-btn" style="font-family: 'Tenor Sans', cursive;">
                                 Все автомобили
-                                </a>
-                            <!-- <a href="contact.html" class="bordered-btn">Contact Us</a> -->
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -88,17 +85,12 @@
                         int countCars = 0;
                         foreach (var car in item.Cars)
                         {
-
-
-
-
                             <div class="col-lg-4 col-md-6 text-center mt-4">
                                 <a href="/Cars/View/@(car.Id)">
                                     <div class="single-product-item p-0 m-0" style="position:relative">
                                         <h3 class="two__block_slide__text__name">@car.Brand.Name @car.Model</h3>
                                         <img class="m-0 p-2 img-cart" src="/Data/imgs/cars/@(car.Id)/1.png" alt="">
                                         <div class="product-image p-0 m-0">
-                                            <!--	<a href="single-product.html"><img class="m-0 p-0" src="assets/img/products/product-img-1.jpg" alt=""></a> -->
                                         </div>
                                         <div class="d-flex">
                                             <p class="product-price  d-flex flex-grow-1 align-self-center text-left m-0 bd-highlight px-2">
@@ -111,7 +103,6 @@
                                 </a>
                             </div>
 
-                            
                             countCars++;
                             if (countCars >= Model.CountCars)
                             {
@@ -122,26 +113,6 @@
                                     </a>
                                 </div>
 
-                                //<div class="col-lg-4 col-md-6 text-center mt-4">
-                                //    <a href="/Cars?cartype=@(item.Id)">
-                                //        <div class="single-product-item p-0 m-0" style="position:relative">
-                                //            <img class="m-0 p-2 img-cart" src="~/imgs/right.png" alt="">
-
-                                //            <div class="product-image p-0 m-0">
-                                //                <!--	<a href="single-product.html"><img class="m-0 p-0" src="assets/img/products/product-img-1.jpg" alt=""></a> -->
-                                //            </div>
-                                //            <div class="d-flex">
-                                               
-                                //                <p class="product-info-price d-flex flex-grow-1 align-self-center text-left m-0 bd-highlight px-2">
-                                //                    Больше автомобилей
-                                //                </p>
-
-                                //            </div>
-                                //        </div>
-                                //    </a>
-                                //</div>
-
-
                                 break;
                             }
                         }
@@ -149,23 +120,12 @@
                     }
                 </div>
 
-
-
                 if (countTypes >= Model.CountTypes)
                 {
                     break;
                 }
-
-
-
             }
-
         }
-
-
-
-
-
     </div>
 </div>
 <!-- end product section -->
