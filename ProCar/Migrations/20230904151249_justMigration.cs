@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProCar.Migrations
 {
-    public partial class MysqlAdd1 : Migration
+    public partial class justMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -141,6 +141,39 @@ namespace ProCar.Migrations
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.InsertData(
+                table: "DriveTypes",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "передний" },
+                    { 2, "полный" },
+                    { 3, "задний" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "FuelTypes",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "бензин" },
+                    { 2, "дизель" },
+                    { 3, "электричество" },
+                    { 4, "пропан" },
+                    { 5, "метан" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "GearboxTypes",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "механическая" },
+                    { 2, "автомат" },
+                    { 3, "вариатор" },
+                    { 4, "робот" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cars_BrandId",
