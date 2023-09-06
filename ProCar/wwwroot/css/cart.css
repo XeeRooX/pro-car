@@ -13,7 +13,7 @@
 
 .img-cart {
     object-fit: cover;
-   aspect-ratio:4/3;
+    aspect-ratio: 4/3;
     border-radius: 15px;
 }
 
@@ -21,12 +21,12 @@
     background-color: #cdcdcf;
     border-radius: 15px;
 }
-.brand-img{
-   padding: 5px;
-    height:50px;
 
-   
+.brand-img {
+    padding: 5px;
+    height: 50px;
 }
+
 .brand-all {
     display: inline-block;
     font-weight: 700;
@@ -38,6 +38,7 @@
     padding: 8px 20px;
     border-radius: 25px;
 }
+
 .brand-all-active {
     color: white;
     background-color: #f28123;
@@ -46,7 +47,6 @@
 
 
 button.boxed-btn {
-  
 }
 
     button.boxed-btn:hover {
@@ -54,6 +54,7 @@ button.boxed-btn {
         color: #F28123;
         border-color: #051922;
     }
+
     button.boxed-btn:active {
         background-color: #051922;
         color: #F28123;
@@ -76,3 +77,11 @@ button.boxed-btn {
 button.boxed-btn {
     border-color: #F28123;
 }
+
+.color-breadcrumb {
+    color: #f28123;
+}
+
+    .color-breadcrumb:hover {
+        color: #a55817;
+    }
