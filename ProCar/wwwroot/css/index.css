@@ -1,0 +1,32 @@
+﻿.top-header-area {
+    background-color: rgba(255, 255, 255, 0);
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.all-cars-btn {
+    border-radius: 12px;
+    background-color: #ff914d;
+    color: white;
+    font-family: 'Tenor Sans', cursive;
+    font-size: 18px;
+}
+
+    .all-cars-btn:hover {
+        border-radius: 12px;
+        background-color: #cc743d;
+        color: white;
+    }
+
+    .all-cars-btn:active {
+        border-radius: 12px;
+        background-color: #cc743d;
+        color: white;
+    }
+
+.btn:first-child:active {
+    border-radius: 12px;
+    background-color: #cc743d;
+    color: white;
+}

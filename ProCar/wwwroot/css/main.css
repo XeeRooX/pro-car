@@ -26,6 +26,7 @@ body {
     line-height: 1.8;
     color: #051922;
     overflow-x: hidden;
+    background-color: #051922;
 }
 
     body img {
@@ -387,7 +388,7 @@ p {
 
 @media only screen and (max-width: 767.96px) {
     .pt-150 {
-        padding-top: 100px;
+        padding-top: 120px;
     }
 }
 
@@ -397,7 +398,7 @@ p {
 
 @media only screen and (max-width: 767.96px) {
     .pb-150 {
-        padding-bottom: 100px;
+        padding-bottom: 120px;
     }
 }
 
@@ -882,7 +883,8 @@ a.mobile-show {
 .footer-area {
     background-color: #051922;
     color: #fff;
-    padding: 150px 0;
+    padding: 70px 0;
+    
 }
 
 h2.widget-title {
@@ -1396,7 +1398,7 @@ a.mobile-show.search-bar-icon {
 }
 
 .hero-area {
-    height: 100%;
+    height: 100vh;
     position: relative;
     z-index: 1;
 }
