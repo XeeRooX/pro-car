@@ -45,13 +45,13 @@
                                     if (i == 1)
                                     {
                                         <div class="carousel-item active">
-                                            <img src="/Data/imgs/cars/@(Model.Car.Id)/@(i).png" style="object-fit: cover; aspect-ratio:4/3; background-color:white" class="d-block" alt="">
+                                            <img src="~/cars/@(Model.Car.Id)/@(i).png" style="object-fit: cover; aspect-ratio:4/3; background-color:white" class="d-block" alt="" asp-append-version="true">
                                         </div>
                                     }
                                     else
                                     {
                                         <div class="carousel-item">
-                                            <img src="/Data/imgs/cars/@(Model.Car.Id)/@(i).png" style="object-fit: cover; aspect-ratio:4/3; background-color:white " class="d-block w-100" alt="">
+                                            <img src="~/cars/@(Model.Car.Id)/@(i).png" style="object-fit: cover; aspect-ratio:4/3; background-color:white " class="d-block w-100" alt="" asp-append-version="true">
                                         </div>
                                     }
 

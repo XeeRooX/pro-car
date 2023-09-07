@@ -27,8 +27,6 @@ namespace ProCar.Pages.Cars
         }
         public IActionResult OnGet(int id)
         {
-            Console.WriteLine("111");
-
             Car = _carsService.GetById(id);
             if(Car == null)
             {

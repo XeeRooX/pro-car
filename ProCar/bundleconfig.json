@@ -1,0 +1,24 @@
+[
+  {
+    "outputFileName": "wwwroot/css/bundle.css",
+    "inputFiles": [
+      "wwwroot/css/cart.css",
+      "wwwroot/css/layout.css",
+      "wwwroot/css/main.css",
+      "wwwroot/css/responsive.css",
+      "wwwroot/css/signin.css",
+      "wwwroot/css/site.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/bundle.js",
+    "inputFiles": [
+      "wwwroot/js/main.js",
+      "wwwroot/js/sticker.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    }
+  }
+]

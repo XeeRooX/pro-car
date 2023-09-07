@@ -38,6 +38,16 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+var webRootProvider = new PhysicalFileProvider(builder.Environment.WebRootPath);
+
+var newPathProvider = new PhysicalFileProvider(Path.Join(builder.Environment.ContentRootPath,"Data","imgs"));
+
+var compositeProvider = new CompositeFileProvider(webRootProvider,
+                                                  newPathProvider);
+
+// Update the default provider.
+app.Environment.WebRootFileProvider = compositeProvider;
+
 //app.UseHttpsRedirection();
 app.UseStaticFiles();
 
@@ -52,7 +62,7 @@ IHostEnvironment? env = app.Services.GetService<IHostEnvironment>();
 app.UseFileServer(new FileServerOptions()
 {
     FileProvider = new PhysicalFileProvider(
-        Path.Combine(env.ContentRootPath, "node_modules")),
+        Path.Combine(env!.ContentRootPath, "node_modules")),
     RequestPath = "/node_modules",
     EnableDirectoryBrowsing = false
 });

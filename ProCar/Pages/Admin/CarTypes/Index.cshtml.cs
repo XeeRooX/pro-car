@@ -43,6 +43,7 @@ namespace ProCar.Pages.Admin.CarTypes
         {
             [Required(ErrorMessage = "Ёто поле об€зательно дл€ заполнени€")]
             [CarTypeNameUnique]
+            [MaxLength(50, ErrorMessage = "ћаксимальна€ длина названи€ - {0} символов")]
             public string Name { get; set; } = null!;
         }
     }
