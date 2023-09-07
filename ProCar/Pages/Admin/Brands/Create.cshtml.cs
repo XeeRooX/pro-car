@@ -28,9 +28,14 @@ namespace ProCar.Pages.Admin.Brands
                 Message = "ошибка добавления: элемент уже существует";
                 return Page();
             }
-            else if(name == null)
+            else if(name == null || name=="")
             {
                 Message = "ошибка добавления: неккоректно введено значение";
+                return Page();
+            }
+            else if (name.Count()>50)
+            {
+                Message = "ошибка добавления: слишком большое значение";
                 return Page();
             }
             int id = _brandService.AddType(name).Id;
