@@ -56,7 +56,7 @@ namespace ProCar.Pages.Cars
             message.AppendLine($"🔗 Ссылка на автомобиль: https://{hostname}/Cars/View/{model.Id}/");
             message.AppendLine($"\n\U0001f9d1 Информация о клиенте");
             message.AppendLine($"📃 Имя: {model.Name}");
-            message.AppendLine($"📞 Номер телефона: {model.Phone}");
+            message.AppendLine($"📞 Номер телефона: {model.Phone.Replace("-", "").Replace(" ", "").Replace("(", "").Replace(")", "")}");
             message.AppendLine($"📆 Аренда от: {model.RentFrom}");
             message.AppendLine($"📆 Аренда до: {model.RentBefore}");
             _botMessage.Send(message.ToString());
