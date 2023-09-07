@@ -1,0 +1,38 @@
+﻿.mobile-style {
+    background-color: #404040;
+    color: #fff;
+}
+
+    .mobile-style h5 {
+        color: #fff;
+        font-family: 'Tenor Sans', cursive;
+    }
+
+    .mobile-style ul {
+        list-style-type: none;
+    }
+
+    .mobile-style li {
+        text-align: left;
+        font-family: 'Tenor Sans', cursive;
+    }
+
+    .mobile-style a {
+        font-size: 1.2rem;
+        color: #fff;
+    }
+
+    .mobile-style img {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+.footer-area h2, p, li {
+    font-family: 'Tenor Sans', cursive;
+}
+
+.footer-my {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
