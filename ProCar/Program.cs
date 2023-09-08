@@ -53,7 +53,7 @@ app.UseFileServer(new FileServerOptions()
 {
     FileProvider = new PhysicalFileProvider(
         Path.Combine(env.ContentRootPath, "node_modules")),
-    RequestPath = "/node_modules",
+    RequestPath = "./node_modules",
     EnableDirectoryBrowsing = false
 });
 
@@ -61,7 +61,7 @@ app.UseFileServer(new FileServerOptions()
 {
     FileProvider = new PhysicalFileProvider(
         Path.Combine(env.ContentRootPath, "Data")),
-    RequestPath = "/Data",
+    RequestPath = "./Data",
     EnableDirectoryBrowsing = false
 });
 
