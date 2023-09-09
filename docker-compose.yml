@@ -14,6 +14,10 @@ services:
     restart: always
     environment:
       ConnectionStrings__DefaultConnection: "server=db;port=3306;user=newuser;database=mydb;password=password;"
+      ASPNETCORE_ENVIRONMENT: "Production"
+      ASPNETCORE_URLS: "http://+:80"
+    ports:
+    - "5000:80"
 
   db:
     image: mysql:8.0.33
