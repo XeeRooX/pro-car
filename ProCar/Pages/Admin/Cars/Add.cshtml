@@ -41,7 +41,7 @@
         <label>Марка</label>
         <select class="form-select" asp-for="Input.BrandId" required>
             <option selected value="" disabled>-- Выберите марку --</option>
-            <option value="999">Проверка некорректного Id</option>
+           
             @foreach (var item in Model.FormData.Brands)
             {
                 <option value="@item.Id">@item.Name</option>
@@ -100,8 +100,8 @@
     </div>
     <div class="mb-3">
         <label>Объем двигателя</label>
-        <input class="form-control" value="@Model" type="number" step="0.1" id="engine-capacity" required min="0" max="10" />
-        <input class="form-control d-none" asp-for="Input.EngineСapacity" value="" id="engine-capacity-text" type="text" />
+        <input class="form-control" type="number" step="0.1" asp-for="Input.EngineСapacity" id="engine-capacity-get" required min="0" max="10" />
+    @*    <input class="form-control d-none" asp-for="Input.EngineСapacity"  id="engine-capacity-text" type="text" />*@
         <span asp-validation-for="Input.EngineСapacity"></span>
     </div>
     <div class="mb-3">
@@ -130,16 +130,18 @@
 
 </form>
 <script>
-    $("form").submit(function () {
-        var value = $("#engine-capacity").val();
-        var idx = value.indexOf(".");
-        if (idx > 0) {
-            value = value.replace(".", ",");
-        }
-        console.log("idx: " + idx + " value: " + value);
-        $("#engine-capacity-text").val(value);
-        console.log("changed: " + value);
-    });
+    //$("form").submit(function () {
+    //    var value = $("#engine-capacity-get").val();
+    //    var idx = value.indexOf(".");
+
+    //    console.log(value+"uhuuy");
+    //    if (idx > 0) {
+    //        value = value.replace(".", ",");
+    //    }
+    //    console.log("idx: " + idx + " value: " + value);
+    //    $("#engine-capacity-text").val(value);
+    //    console.log("changed: " + $("#engine-capacity-text").val());
+    //});
 
     //Filepond
 
@@ -189,14 +191,19 @@
 
 
         $("#uploadform").submit(function (e) {
+            console.log("Загрузка формы");
             e.preventDefault();
             var formdata = new FormData(this);
             // append FilePond files into the form data
             pondFiles = pond.getFiles();
+
+            console.log("Пред цикл");
             for (var i = 0; i < pondFiles.length; i++) {
                 // append the blob file
                 formdata.append('photos', pondFiles[i].file);
             }
+
+            console.log("Пред аджакс");
 
             $.ajax({
                 url: "/Admin/Cars/Add",
@@ -205,13 +212,22 @@
                 contentType: false,
                 method: "post",
                 success: function (result) {
+                    console.log("Успешно");
+                    console.log("result "+result);
                     if (result.redirectUrl !== undefined) {
                         window.location.replace(result.redirectUrl);
                     } else {
-                        // No redirect found, do something else
+                        document.open("text/html", "replace");
+                        document.write(result);
+                        document.close();
                     }
                 },
+                error: function () {
+                    console.log("Отвал");
 
+                    alert(request.responseText);
+                    alert(error);
+                }
             });
 
         })

@@ -29,6 +29,7 @@ namespace ProCar.Pages.Admin.Cars
         public IActionResult OnPost(IFormFileCollection photos)
         {
 
+            
             if (!ModelState.IsValid)
             {
                 FormData = _carsService.GetDataAddCarsGet();

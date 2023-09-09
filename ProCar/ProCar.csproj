@@ -25,6 +25,12 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
 
+	<ItemGroup>
+		<Content Include="Data\*">
+			<CopyToPublishDirectory>always</CopyToPublishDirectory>
+		</Content>
+	</ItemGroup>
+	
   <ItemGroup>
     <None Update="Dockerfile">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

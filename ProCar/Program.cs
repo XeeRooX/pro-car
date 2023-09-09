@@ -10,8 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+Console.WriteLine($"!!!!{connectionString}!!!!!");
 //builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connectionString));
 //new MySqlServerVersion(new Version())
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 33))));
@@ -49,19 +49,22 @@ app.MapRazorPages();
 
 IHostEnvironment? env = app.Services.GetService<IHostEnvironment>();
 
-app.UseFileServer(new FileServerOptions()
-{
-    FileProvider = new PhysicalFileProvider(
-        Path.Combine(env.ContentRootPath, "node_modules")),
-    RequestPath = "./node_modules",
-    EnableDirectoryBrowsing = false
-});
+//var aasd = env.ContentRootPath;
+//Console.WriteLine(aasd+" <--- !!!!");
+
+//app.UseFileServer(new FileServerOptions()
+//{
+//    FileProvider = new PhysicalFileProvider(
+//        Path.Combine(env.ContentRootPath, "node_modules")),
+//    RequestPath = "/node_modules",
+//    EnableDirectoryBrowsing = false
+//});
 
 app.UseFileServer(new FileServerOptions()
 {
     FileProvider = new PhysicalFileProvider(
         Path.Combine(env.ContentRootPath, "Data")),
-    RequestPath = "./Data",
+    RequestPath = "/Data",
     EnableDirectoryBrowsing = false
 });
 

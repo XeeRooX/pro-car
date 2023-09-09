@@ -10,7 +10,8 @@ using ProCar.Models;
 namespace ProCar.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class justMigration
+    [Migration("20230908181808_ItsMigration")]
+    partial class ItsMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
