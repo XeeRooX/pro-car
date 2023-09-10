@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authorization;
+п»їusing Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -51,9 +51,9 @@ namespace ProCar.Pages.Admin.CarTypes
 
         public class InputModel
         {
-            [Required(ErrorMessage = "Это поле обязательно для заполнения")]
+            [Required(ErrorMessage = "Р­С‚Рѕ РїРѕР»Рµ РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ РґР»СЏ Р·Р°РїРѕР»РЅРµРЅРёСЏ")]
             [CarTypeNameUnique]
-            [MaxLength(50, ErrorMessage = "Максимальная длинна названия - {0} символов")]
+            [MaxLength(50, ErrorMessage = "РњР°РєСЃРёРјР°Р»СЊРЅР°СЏ РґР»РёРЅРЅР° РЅР°Р·РІР°РЅРёСЏ - {0} СЃРёРјРІРѕР»РѕРІ")]
             public string Name { get; set; } = null!;
         }
     }

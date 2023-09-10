@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authorization;
+п»їusing Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProCar.Services;
@@ -25,22 +25,22 @@ namespace ProCar.Pages.Admin.Brands
         {
             if (0 != _brandService.ElementExists(name))
             {
-                Message = "Ошибка добавления: элемент уже существует";
+                Message = "РћС€РёР±РєР° РґРѕР±Р°РІР»РµРЅРёСЏ: СЌР»РµРјРµРЅС‚ СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚";
                 return Page();
             }
             else if(name == null || name=="")
             {
-                Message = "Ошибка добавления: неккоректно введено значение";
+                Message = "РћС€РёР±РєР° РґРѕР±Р°РІР»РµРЅРёСЏ: РЅРµРєРєРѕСЂРµРєС‚РЅРѕ РІРІРµРґРµРЅРѕ Р·РЅР°С‡РµРЅРёРµ";
                 return Page();
             }
             else if (name.Count()>50)
             {
-                Message = "Ошибка добавления: слишком большое значение";
+                Message = "РћС€РёР±РєР° РґРѕР±Р°РІР»РµРЅРёСЏ: СЃР»РёС€РєРѕРј Р±РѕР»СЊС€РѕРµ Р·РЅР°С‡РµРЅРёРµ";
                 return Page();
             }
             if (!_serverUploadService.TypeFilePng(uploads))
             {
-                Message = "Ошибка добавления: непподерживаемый тип файла";
+                Message = "РћС€РёР±РєР° РґРѕР±Р°РІР»РµРЅРёСЏ: РЅРµРїРїРѕРґРµСЂР¶РёРІР°РµРјС‹Р№ С‚РёРї С„Р°Р№Р»Р°";
                 return Page();
             }
 

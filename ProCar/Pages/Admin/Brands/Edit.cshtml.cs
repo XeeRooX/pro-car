@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authorization;
+п»їusing Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProCar.Models;
@@ -38,13 +38,13 @@ namespace ProCar.Pages.Admin.Brands
             }
             else if (name == null)
             {
-                Message = "ошибка редактирования: неккоректно введено значение";
+                Message = "РѕС€РёР±РєР° СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ: РЅРµРєРєРѕСЂРµРєС‚РЅРѕ РІРІРµРґРµРЅРѕ Р·РЅР°С‡РµРЅРёРµ";
                 Brand = _brandService.GetById(id);
                 return Page();
             }
             else if (id != _brandService.ElementExists(name) && 0 != _brandService.ElementExists(name))
             {
-                Message = "ошибка редактирования: элемент с таким именем уже существует";
+                Message = "РѕС€РёР±РєР° СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ: СЌР»РµРјРµРЅС‚ СЃ С‚Р°РєРёРј РёРјРµРЅРµРј СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚";
                 Brand = _brandService.GetById(id);
                 return Page();
             }
@@ -52,7 +52,7 @@ namespace ProCar.Pages.Admin.Brands
             {
                 if (!_uploadService.TypeFilePng(uploads))
                 {
-                    Message = "ошибка редактирования: тип файла не поддерживается";
+                    Message = "РѕС€РёР±РєР° СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ: С‚РёРї С„Р°Р№Р»Р° РЅРµ РїРѕРґРґРµСЂР¶РёРІР°РµС‚СЃСЏ";
                     return Page();
                 }
 
