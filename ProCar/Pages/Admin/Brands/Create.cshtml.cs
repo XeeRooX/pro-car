@@ -25,26 +25,26 @@ namespace ProCar.Pages.Admin.Brands
         {
             if (0 != _brandService.ElementExists(name))
             {
-                Message = "ошибка добавления: элемент уже существует";
+                Message = "Ошибка добавления: элемент уже существует";
                 return Page();
             }
             else if(name == null || name=="")
             {
-                Message = "ошибка добавления: неккоректно введено значение";
+                Message = "Ошибка добавления: неккоректно введено значение";
                 return Page();
             }
             else if (name.Count()>50)
             {
-                Message = "ошибка добавления: слишком большое значение";
+                Message = "Ошибка добавления: слишком большое значение";
                 return Page();
             }
-            int id = _brandService.AddType(name).Id;
             if (!_serverUploadService.TypeFilePng(uploads))
             {
-                Message = "ошибка добавления: непподерживаемый тип файла";
+                Message = "Ошибка добавления: непподерживаемый тип файла";
                 return Page();
             }
 
+            int id = _brandService.AddType(name).Id;
             _serverUploadService.UploadBrandPhoto(id, uploads);
           
             return RedirectToPage("/Admin/Brands/Index");
