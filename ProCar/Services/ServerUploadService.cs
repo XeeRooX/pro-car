@@ -15,7 +15,7 @@
 
             foreach (var file in files)
             {
-                string fullPath = $"{uploadPath}/{id}{Path.GetExtension(file.FileName)}";
+                string fullPath = $"{uploadPath}/{id}.png";
 
                 using (var fileStream = new FileStream(fullPath, FileMode.Create))
                 {
