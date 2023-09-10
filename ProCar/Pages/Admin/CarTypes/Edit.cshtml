@@ -15,7 +15,7 @@
 <form method="post">
     <div class=" mb-3">
         <label class="form-label mb-1" for="name">Название</label>
-        <input class="form-control" id="name" asp-for="Input.Name" value="@Model.LastName" required />
+        <input class="form-control" id="name" asp-for="Input.Name" value="@Model.LastName" maxlength="50" required/>
         <input name="id" value="@RouteData.Values["id"]" class="d-none" />
     </div>
     <span asp-validation-for="Input.Name"></span>

@@ -44,14 +44,14 @@
                             {
                                     <div class="col-auto brand-active" style=" display: flex; align-items: center;  justify-content: center">
                                             <a asp-page="/Cars/Index" asp-route-brand="@item.Id"
-                           class="p-1 m-0"><img src="Data/imgs/brands/@(item.Id).png" class="brand-img" /> </a>
+                                   class="p-1 m-0"><img src="~/brands/@(item.Id).png" class="brand-img" asp-append-version="true" /> </a>
                                         </div>
                             }
                             else
                             {
                                 <div class="col-auto" style="position: display: flex; align-items: center;  justify-content: center">
                                             <a asp-page="/Cars/Index" asp-route-brand="@item.Id"
-                           class="p-1  m-0"><img src="Data/imgs/brands/@(item.Id).png" class="brand-img" /> </a>
+                                   class="p-1  m-0"><img src="~/brands/@(item.Id).png" class="brand-img" asp-append-version="true" /> </a>
                                         </div>
                             }
 
@@ -106,7 +106,7 @@
                         <a href="/Cars/View/@(item.Id)">
                             <div class="single-product-item p-0 m-0" style="position:relative">
                                 <h3 class="two__block_slide__text__name">@item.Brand.Name @item.Model</h3>
-                                <img class="m-0 p-2 img-cart" src="/Data/imgs/cars/@(item.Id)/1.png" alt="">
+                                <img class="m-0 p-2 img-cart" src="~/cars/@(item.Id)/1.png" alt="" asp-append-version="true">
                                 <div class="product-image p-0 m-0">
                                     <!--	<a href="single-product.html"><img class="m-0 p-0" src="assets/img/products/product-img-1.jpg" alt=""></a> -->
                                 </div>
