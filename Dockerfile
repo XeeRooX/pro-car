@@ -13,7 +13,7 @@ WORKDIR /src
 COPY ["ProCar/ProCar.csproj", "ProCar/"]
 #COPY ["ProCar/node_modules/", "/app/node_modules/"]
 #RUN ls -la /app/node_modules/
-COPY ["ProCar/Data/", "/app/Data/"]
+COPY ["ProCar/Data/imgs", "/app/Data/imgs"]
 #RUN ls -la /app/Data/
 RUN dotnet restore "ProCar/ProCar.csproj"
 COPY . .
