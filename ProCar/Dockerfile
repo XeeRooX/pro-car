@@ -12,9 +12,12 @@ WORKDIR /src
 COPY ["ProCar/ProCar.csproj", "ProCar/"]
 #COPY ["ProCar/node_modules/", "/app/node_modules/"]
 #RUN ls -la /app/node_modules/
-COPY ["ProCar/Data/", "/app/Data/"]
+#COPY ["ProCar/Data/imgs/text.txt", "/app/Data/imgs/"]
 #RUN ls -la /app/Data/
-COPY ["ProCar/Data/", "/app/Migrations/"]
+#COPY ["ProCar/Data/", "/app/Migrations/"]
+#RUN mkdir -p /app/Data/imgs
+
+
 RUN dotnet restore "ProCar/ProCar.csproj"
 COPY . .
 WORKDIR "/src/ProCar"
@@ -25,6 +28,11 @@ RUN dotnet publish "ProCar.csproj" -c Release -o /app/publish /p:UseAppHost=fals
 
 FROM base AS final
 WORKDIR /app
+
+RUN mkdir -p /app/Data/imgs
+RUN mkdir -p /Data/imgs
+RUN mkdir -p Data/imgs
+
 COPY --from=publish /app/publish .
 
 
