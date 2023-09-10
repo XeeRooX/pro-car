@@ -87,12 +87,12 @@
         {
             foreach (var file in files)
             {
-               if(Path.GetExtension(file.FileName) != ".png" || Path.GetExtension(file.FileName) != ".jpg" || Path.GetExtension(file.FileName) != ".jpeg")
+               if(Path.GetExtension(file.FileName) == ".png" || Path.GetExtension(file.FileName) == ".jpg" || Path.GetExtension(file.FileName) == ".jpeg")
                 {
-                    return false;
+                    return true;
                 }
             }
-            return true;
+            return false;
         }
 
         public int CountCarPhotos(int id)
