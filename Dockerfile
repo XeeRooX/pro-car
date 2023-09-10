@@ -11,11 +11,13 @@ EXPOSE 5000
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["ProCar/ProCar.csproj", "ProCar/"]
-RUN dotnet restore "ProCar/ProCar.csproj"
+COPY ["ProCar/Data/imgs/text.txt", "/app/Data/imgs/"]
+
 #COPY ["ProCar/node_modules/", "/app/node_modules/"]
-RUN ls -la /app/node_modules/
-COPY ["ProCar/Data/", "/app/Data/"]
-RUN ls -la /app/Data/
+#RUN ls -la /app/node_modules/
+#COPY ["ProCar/Data/imgs", "/app/Data/imgs"]
+#RUN ls -la /app/Data/
+RUN dotnet restore "ProCar/ProCar.csproj"
 COPY . .
 WORKDIR "/src/ProCar"
 RUN dotnet build "ProCar.csproj" -c Release -o /app/build
@@ -25,10 +27,12 @@ RUN dotnet publish "ProCar.csproj" -c Release -o /app/publish /p:UseAppHost=fals
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
 
-RUN locale-gen en_US.UTF-8
-RUN update-locale LANG=en_US.UTF-8 LC_MESSAGES=POSIX
+RUN mkdir -p /app/Data/imgs
+RUN mkdir -p /Data/imgs
+RUN mkdir -p Data/imgs
+
+COPY --from=publish /app/publish .
 
 
 ENTRYPOINT ["dotnet", "ProCar.dll"]
