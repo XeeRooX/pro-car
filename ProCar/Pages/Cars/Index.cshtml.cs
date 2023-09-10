@@ -25,7 +25,7 @@ namespace ProCar.Pages.Cars
             _carTypeService = carTypeService;
             _carsService = carsService;
         }
-        public void OnGet(int brand, int cartype)
+        public IActionResult OnGet(int brand, int cartype)
         {
             Brands = _brandService.GetAll();
             CarTypes = _carTypeService.GetAll();
@@ -38,12 +38,22 @@ namespace ProCar.Pages.Cars
             }
             else if(brand !=0)
             {
+                if (!_brandService.ElementExists(brand))
+                {
+                    return NotFound();
+                }
                 Cars = _brandService.GetById(brand).Cars;
             }
             else if(cartype != 0)
             {
+                if (!_carTypeService.ElementExists(cartype))
+                {
+                    return NotFound();
+                }
                 Cars = _carTypeService.GetById(cartype).Cars;
             }
+
+            return Page();
         }
 
 
