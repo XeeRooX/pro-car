@@ -122,9 +122,9 @@
     <div class="mb-3">
         <label>Объем двигателя</label>
         <input value="@Model.FormData.EngineСapacity" id="engine-capacity-str" class="d-none" />
-        <input class="form-control" value="@Model.FormData.EngineСapacity" type="number" step="0.1" id="engine-capacity" required min="0" max="10" />
-        <input class="form-control d-none" asp-for="Input.EngineСapacity" value="" id="engine-capacity-text" type="text" />
-        <span asp-validation-for="Input.EngineСapacity"></span>
+        <input class="form-control" value="@Model.FormData.EngineСapacity" asp-for="Input.EngineСapacity" type="number" step="0.1" id="engine-capacity" required min="0" max="10" />
+@*        <input class="form-control d-none" asp-for="Input.EngineСapacity" value="" id="engine-capacity-text" type="text" />
+*@        <span asp-validation-for="Input.EngineСapacity"></span>
     </div>
     <div class="mb-3">
         <label>Год выпуска</label>
@@ -152,20 +152,20 @@
     <button class="btn btn-primary" type="submit">Сохранить</button>
 </form>
 <script>
-    var x = $("#engine-capacity-str").val();
-    x = x.replace(",", ".");
-    $("#engine-capacity").val(x);
+    //var x = $("#engine-capacity-str").val();
+    //x = x.replace(",", ".");
+    //$("#engine-capacity").val(x);
 
-    $("form").submit(function () {
-        var value = $("#engine-capacity").val();
-        var idx = value.indexOf(".");
-        if (idx > 0) {
-            value = value.replace(".", ",");
-        }
-        console.log("idx: " + idx + " value: " + value);
-        $("#engine-capacity-text").val(value);
-        console.log("changed: " + value);
-    });
+    //$("form").submit(function () {
+    //    var value = $("#engine-capacity").val();
+    //    var idx = value.indexOf(".");
+    //    if (idx > 0) {
+    //        value = value.replace(".", ",");
+    //    }
+    //    console.log("idx: " + idx + " value: " + value);
+    //    $("#engine-capacity-text").val(value);
+    //    console.log("changed: " + value);
+    //});
 
     //Filepond
 
@@ -174,7 +174,7 @@
 
     FilePond.setOptions({
         labelIdle: 'Перетащите фото или <span class="filepond--label-action"> загрузите </span>',
-        acceptedFileTypes: ['image/png'],
+        acceptedFileTypes: ['image/png', 'image/jpeg'],
         itemInsertLocation: 'after',
         
 

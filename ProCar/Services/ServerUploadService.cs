@@ -87,7 +87,7 @@
         {
             foreach (var file in files)
             {
-               if(Path.GetExtension(file.FileName) != ".png")
+               if(Path.GetExtension(file.FileName) != ".png" || Path.GetExtension(file.FileName) != ".jpg" || Path.GetExtension(file.FileName) != ".jpeg")
                 {
                     return false;
                 }
