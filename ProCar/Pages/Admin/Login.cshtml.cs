@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authentication;
+п»їusing Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -25,12 +25,12 @@ namespace ProCar.Pages.Admin
             string adminPassword = _configuration.GetValue<string>("AdminPassword");
             if (password == null || password == "")
             {
-                Message = "Ошибка: поле не может быть пустым";
+                Message = "РћС€РёР±РєР°: РїРѕР»Рµ РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РїСѓСЃС‚С‹Рј";
                 return Page();
             }
             else if (password != adminPassword)
             {
-                Message = "Ошибка: неверный пароль";
+                Message = "РћС€РёР±РєР°: РЅРµРІРµСЂРЅС‹Р№ РїР°СЂРѕР»СЊ";
                 return Page();
             }
 
