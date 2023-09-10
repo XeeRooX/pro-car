@@ -11,11 +11,11 @@ EXPOSE 5000
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["ProCar/ProCar.csproj", "ProCar/"]
-RUN dotnet restore "ProCar/ProCar.csproj"
 #COPY ["ProCar/node_modules/", "/app/node_modules/"]
-RUN ls -la /app/node_modules/
+#RUN ls -la /app/node_modules/
 COPY ["ProCar/Data/", "/app/Data/"]
-RUN ls -la /app/Data/
+#RUN ls -la /app/Data/
+RUN dotnet restore "ProCar/ProCar.csproj"
 COPY . .
 WORKDIR "/src/ProCar"
 RUN dotnet build "ProCar.csproj" -c Release -o /app/build
