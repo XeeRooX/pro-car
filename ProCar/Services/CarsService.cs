@@ -68,7 +68,7 @@ namespace ProCar.Services
 
         public List<Car> GetAllCars()
         {
-            return _context.Cars.ToList();
+            return _context.Cars.Include(c=>c.GearboxType).ToList();
         }
 
         public List<CarAdminViewDto> GetAllCarsForView()
