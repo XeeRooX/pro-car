@@ -36,6 +36,11 @@ namespace ProCar.Services
             return car.Id;
         }
 
+        public int CountCars()
+        {
+            return _context.Cars.Count();
+        }
+
         public void DeleteCar(int id)
         {
             Car car = _context.Cars.Find(id)!;
@@ -142,6 +147,36 @@ namespace ProCar.Services
             };
 
             return result;
+        }
+
+        public List<Car> TakeCars(int countLoadedCars, int howManyLoad, int brandId = 0, int carTypeId = 0)
+        {
+            if (brandId != 0)
+            {
+                var cars = _context.Cars.
+                    Where(c => c.BrandId == brandId).
+                    Include(x => x.CarType).Include(x => x.Brand).Include(x => x.DriveType).Include(x => x.FuelType).Include(x => x.GearboxType);
+
+                var res = cars.Skip(countLoadedCars).Take(howManyLoad).ToList();
+                return res;
+            }
+            else if(carTypeId != 0)
+            {
+                var cars = _context.Cars.
+                    Where(c => c.CarTypeId == carTypeId).
+                    Include(x => x.CarType).Include(x => x.Brand).Include(x => x.DriveType).Include(x => x.FuelType).Include(x => x.GearboxType);
+
+                var res = cars.Skip(countLoadedCars).Take(howManyLoad).ToList();
+                return res;
+            }
+            else
+            {
+                var cars = _context.Cars.
+                    Include(x => x.CarType).Include(x => x.Brand).Include(x => x.DriveType).Include(x => x.FuelType).Include(x => x.GearboxType);
+
+                var res = cars.Skip(countLoadedCars).Take(howManyLoad).ToList();
+                return res;
+            }
         }
     }
 }

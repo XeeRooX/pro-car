@@ -14,6 +14,8 @@ namespace ProCar.Services
         CarAddGetDto GetDataAddCarsGet();
         CarEditDto GetDataEditCars(int id);
         List<CarAdminViewDto> GetAllCarsForView();
+        List<Car> TakeCars(int countLoadedCars, int howManyLoad, int brandId = 0, int carTypeId = 0);
+        int CountCars();
 
     }
 }

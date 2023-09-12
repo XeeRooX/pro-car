@@ -18,6 +18,7 @@ namespace ProCar.Pages.Cars
 
         public int BrandId { get; set; }
         public int CarTypeId { get; set; }
+        public bool ShowLoadButton { get; set; } = false;
 
         public IndexModel(IBrandService brandService, ICarTypeService carTypeService, ICarsService carsService)
         {
@@ -27,6 +28,9 @@ namespace ProCar.Pages.Cars
         }
         public IActionResult OnGet(int brand, int cartype)
         {
+            const int countLoad = 6;
+            int countCars = 0;
+
             Brands = _brandService.GetAll();
             CarTypes = _carTypeService.GetAll();
 
@@ -34,7 +38,8 @@ namespace ProCar.Pages.Cars
             CarTypeId = cartype;
             if (brand == 0 && cartype == 0)
             {
-                Cars = _carsService.GetAllCars();
+                countCars = _carsService.CountCars();
+                Cars = _carsService.TakeCars(0, countLoad);
             }
             else if(brand !=0)
             {
@@ -42,7 +47,9 @@ namespace ProCar.Pages.Cars
                 {
                     return NotFound();
                 }
-                Cars = _brandService.GetById(brand).Cars;
+
+                countCars = _brandService.GetById(brand).Cars.Count;
+                Cars = _carsService.TakeCars(0, countLoad, brandId: brand);
             }
             else if(cartype != 0)
             {
@@ -50,7 +57,14 @@ namespace ProCar.Pages.Cars
                 {
                     return NotFound();
                 }
-                Cars = _carTypeService.GetById(cartype).Cars;
+
+                countCars = _carTypeService.GetById(cartype).Cars.Count;
+                Cars = _carsService.TakeCars(0, countLoad, carTypeId: cartype);
+            }
+
+            if (countCars > countLoad)
+            {
+                ShowLoadButton = true;
             }
 
             return Page();
