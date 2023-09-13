@@ -50,7 +50,7 @@
         <label>Марка</label>
         <select class="form-select" asp-for="Input.BrandId" required>
             <option selected value="" disabled>-- Выберите марку --</option>
-           
+
             @foreach (var item in Model.FormData.Brands)
             {
                 <option value="@item.Id">@item.Name</option>
@@ -90,7 +90,7 @@
         <select class="form-select" asp-for="Input.GearboxTypeId" required>
             <option selected value="" disabled>-- Выберите тип --</option>
             <@foreach (var item in Model.FormData.GearboxTypes)
-            {
+                      {
                         <option value="@item.Id">@item.Name</option>
             }
         </select>

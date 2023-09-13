@@ -3,6 +3,14 @@ version: '3.4'
 volumes:
   datafiles:
   photosCars:
+  certbot-etc:
+  certbot-var:
+  web-root:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/procar/
+      o: bind
 
 services:
   procar:
@@ -41,13 +49,27 @@ services:
     build:
       context: ./ProCar/nginx
       dockerfile: Dockerfile
-
+    
     ports:
       - "80:80"
       - "443:443"
 
     volumes:
-      - /etc/letsencrypt/:/etc/letsencrypt/
+      - ./certbot/www:/var/www/certbot/:ro
+      #- /etc/letsencrypt/:/etc/letsencrypt/
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
     
     links:
       - procar
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      - ./certbot/www/:/var/www/certbot/:rw
+    depends_on:
+      - procar
+    command: certonly --webroot --webroot-path /var/www/certbot/ --email sanek12366751@gmail.com --agree-tos --no-eff-email --staging -d proautotest.is-a.dev
