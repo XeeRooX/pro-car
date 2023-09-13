@@ -3,14 +3,6 @@ version: '3.4'
 volumes:
   datafiles:
   photosCars:
-  certbot-etc:
-  certbot-var:
-  web-root:
-    driver: local
-    driver_opts:
-      type: none
-      device: /home/procar/
-      o: bind
 
 services:
   procar:
