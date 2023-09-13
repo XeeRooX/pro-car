@@ -9,10 +9,19 @@
 <script src="~/js/filepond/filepond-plugin-file-poster.js"></script>
 <script src="~/js/filepond/filepond-plugin-file-validate-type.js"></script>
 <script src="~/js/filepond/filepond-plugin-image-preview.js"></script>
+<script src="~/js/compressorjs/dist/compressor.min.js"></script>
 
 <link href="~/css/filepond/filepond.css" rel="stylesheet">
 <link href="~/css/filepond/filepond-plugin-image-preview.css" rel="stylesheet">
 <link href="~/css/filepond/filepond-plugin-file-poster.css" rel="stylesheet">
+
+<style>
+    .compress-info {
+        background-color: #f1f0ef;
+        color: #4f4f4f;
+        border-radius: 12px;
+    }
+</style>
 
 <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -121,10 +130,11 @@
     </div>
     <div class="mb-3">
         <label>Объем двигателя</label>
+        @*<input class="form-control" type="number" step="0.1" id="engine-capacity-get" required min="0" max="10" />
+        <input class="form-control d-none" asp-for="Input.EngineСapacity" id="engine-capacity-text" type="text" />*@ 
         <input value="@Model.FormData.EngineСapacity" id="engine-capacity-str" class="d-none" />
         <input class="form-control" value="@Model.FormData.EngineСapacity" asp-for="Input.EngineСapacity" type="number" step="0.1" id="engine-capacity" required min="0" max="10" />
-@*        <input class="form-control d-none" asp-for="Input.EngineСapacity" value="" id="engine-capacity-text" type="text" />
-*@        <span asp-validation-for="Input.EngineСapacity"></span>
+        <span asp-validation-for="Input.EngineСapacity"></span>
     </div>
     <div class="mb-3">
         <label>Год выпуска</label>
@@ -148,16 +158,19 @@
     </div>
 
     <input type="file" class="filepond" name="photos" multiple />
+    <div class="compress-info text-center p-3 mb-3 d-none">
+        <label>Сжатие фотографий...</label>
+    </div>
 
     <button class="btn btn-primary" type="submit">Сохранить</button>
 </form>
 <script>
-    //var x = $("#engine-capacity-str").val();
+    //var x = $("#engine-capacity-text").val();
     //x = x.replace(",", ".");
-    //$("#engine-capacity").val(x);
+    //$("#engine-capacity-get").val(x);
 
     //$("form").submit(function () {
-    //    var value = $("#engine-capacity").val();
+    //    var value = $("#engine-capacity-get").val();
     //    var idx = value.indexOf(".");
     //    if (idx > 0) {
     //        value = value.replace(".", ",");
@@ -176,13 +189,9 @@
         labelIdle: 'Перетащите фото или <span class="filepond--label-action"> загрузите </span>',
         acceptedFileTypes: ['image/png', 'image/jpeg'],
         itemInsertLocation: 'after',
-        
-
     });
     var api = "/data/imgs/";
     var str = "@Model.RequestString";
-
-    console.log(str);
 
     $(document).ready(function (e) {
         pond = FilePond.create(
@@ -217,15 +226,42 @@
             });
 
 
-    $("#uploadform").submit(function (e) {
+    $("#uploadform").submit(async function (e) {
         e.preventDefault();
         var formdata = new FormData(this);
         // append FilePond files into the form data
         pondFiles = pond.getFiles();
+
+        const compressImage = async (image) => {
+            try {
+                var compressed = await new Promise((resolve, reject) => {
+                    new Compressor(image, {
+                        quality: 0.6,
+                        maxWidth: 1600,
+                        maxHeight: 1600,
+                        success(result) {
+                            resolve(result);
+                        },
+                        error(err) {
+                            reject(err);
+                        }
+                    });
+                });
+
+                return compressed;
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        $('.compress-info').removeClass('d-none');
+
         for (var i = 0; i < pondFiles.length; i++) {
-            // append the blob file
-            formdata.append('photos', pondFiles[i].file);
+            var photo = await compressImage(pondFiles[i].file);
+            formdata.append('photos', photo);
         }
+
+        $('.compress-info').addClass('d-none');
 
         $.ajax({
             url: "/Admin/Cars/Edit/@(RouteData.Values["id"])",
@@ -237,7 +273,7 @@
                 if (result.redirectUrl !== undefined) {
                     window.location.replace(result.redirectUrl);
                 } else {
-                    // No redirect found, do something else
+                    console.log("ajax request error");
                 }
             },
 
