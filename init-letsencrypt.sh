@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-domains=(proautotest.is-a.dev www.proautotest.is-a.dev)
+domains=(proautotest.is-a.dev)
 rsa_key_size=4096
 data_path="./data/certbot"
 email="sanek12366751@gmail.com" # Adding a valid address is strongly recommended
