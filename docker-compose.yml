@@ -6,6 +6,11 @@ volumes:
   certbot-etc:
   certbot-var:
   web-root:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/procar/
+      o: bind
 
 services:
   procar:
@@ -44,7 +49,9 @@ services:
     build:
       context: ./ProCar/nginx
       dockerfile: Dockerfile
-
+    
+    restart: always
+    
     ports:
       - "80:80"
       - "443:443"
