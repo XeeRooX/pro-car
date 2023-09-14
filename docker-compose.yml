@@ -3,14 +3,7 @@ version: '3.4'
 volumes:
   datafiles:
   photosCars:
-  certbot-etc:
-  certbot-var:
-  web-root:
-    driver: local
-    driver_opts:
-      type: none
-      device: /home/procar/
-      o: bind
+  certeficateLets:
 
 services:
   procar:
@@ -49,27 +42,27 @@ services:
     build:
       context: ./ProCar/nginx
       dockerfile: Dockerfile
-    
+
+    restart: unless-stopped
     ports:
       - "80:80"
       - "443:443"
 
     volumes:
-      - ./certbot/www:/var/www/certbot/:ro
-      #- /etc/letsencrypt/:/etc/letsencrypt/
-      - certbot-etc:/etc/letsencrypt
-      - certbot-var:/var/lib/letsencrypt
+      - certeficateLets:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
     
     links:
       - procar
-
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+  
   certbot:
     image: certbot/certbot
     container_name: certbot
+    restart: unless-stopped
     volumes:
-      - certbot-etc:/etc/letsencrypt
-      - certbot-var:/var/lib/letsencrypt
-      - ./certbot/www/:/var/www/certbot/:rw
+      - certeficateLets:/etc/letsencrypt
+      - ./data/certbot/www:/var/www/certbot
     depends_on:
-      - procar
-    command: certonly --webroot --webroot-path /var/www/certbot/ --email sanek12366751@gmail.com --agree-tos --no-eff-email --staging -d proautotest.is-a.dev
+      - proxy
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
