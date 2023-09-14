@@ -38,6 +38,11 @@ namespace ProCar.Pages.Cars
 
         public IActionResult OnPost(InputModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             Car = _carsService.GetById(model.Id);
             if (Car == null)
             {
