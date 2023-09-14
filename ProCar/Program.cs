@@ -12,9 +12,8 @@ builder.Services.AddRazorPages();
 builder.Services.AddControllers();
 
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-Console.WriteLine($"!!!!{connectionString}!!!!!");
+
 //builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connectionString));
-//new MySqlServerVersion(new Version())
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 33))));
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => options.LoginPath = "/admin/login");
@@ -35,12 +34,9 @@ app.UseAuthorization();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    //app.UseHsts();
 }
 
 var webRootProvider = new PhysicalFileProvider(builder.Environment.WebRootPath);
-
 var newPathProvider = new PhysicalFileProvider(Path.Join(builder.Environment.ContentRootPath,"Data","imgs"));
 
 var compositeProvider = new CompositeFileProvider(webRootProvider,
@@ -51,31 +47,18 @@ app.Environment.WebRootFileProvider = compositeProvider;
 
 //app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthorization();
-
 app.MapRazorPages();
 app.MapControllers();
 
 IHostEnvironment? env = app.Services.GetService<IHostEnvironment>();
 
-//var aasd = env.ContentRootPath;
-//Console.WriteLine(aasd+" <--- !!!!");
-
-//app.UseFileServer(new FileServerOptions()
-//{
-//    FileProvider = new PhysicalFileProvider(
-//        Path.Combine(env.ContentRootPath, "node_modules")),
-//    RequestPath = "/node_modules",
-//    EnableDirectoryBrowsing = false
-//});
 
 app.UseFileServer(new FileServerOptions()
 {
     FileProvider = new PhysicalFileProvider(
-        Path.Combine(env.ContentRootPath, "Data")),
+        Path.Combine(env!.ContentRootPath, "Data")),
     RequestPath = "/Data",
     EnableDirectoryBrowsing = false
 });
