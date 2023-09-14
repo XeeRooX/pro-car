@@ -1,4 +1,4 @@
-function main() {
+﻿function main() {
     $(document.body).on('click', "#load-cars-btn", LoadBtnClick);
 }
 
@@ -50,7 +50,7 @@ function PrintCars(input) {
         temp.find(".car-link").attr('href', `/Cars/View/${data.id}`);
         temp.find(".car-title").text(`${data.brand} ${data.model}`);
         temp.find(".img-cart").attr('src', `/cars/${data.id}/1.png`)
-        temp.find(".car-price").text(`${data.costPerDay} `);
+        temp.find(".car-price").text(`${data.costPerDay} <span class="product-info-price bd-highlight align-self-center px-1">₽/сутки</span>`);
         temp.find(".car-gearbox").text(`${data.gearboxType}`);
         temp.find(".car-year").text(`${data.yearOfIssue}`);
 
