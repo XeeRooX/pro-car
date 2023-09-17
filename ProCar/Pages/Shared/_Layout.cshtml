@@ -22,6 +22,23 @@
     <!-- bootstrap -->
     <link rel="stylesheet" href="~/css/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/bundle.min.css" >
+    <style>
+   
+        body:after {
+            content: "";
+            position: fixed; /* stretch a fixed position to the whole screen */
+            top: 0;
+            height: 100vh; /* fix for mobile browser address bar appearing disappearing */
+            left: 0;
+            right: 0;
+            z-index: -1; /* needed to keep in the background */
+            background: url(../imgs/hero-bg.jpg?v=@(new Random().Next(100))) center center;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    </style>
 </head>
 
 <body>
@@ -112,7 +129,7 @@
     @RenderBody()
     </div>
     <!-- footer -->
-    <div class=" footer-area mt-4">
+    <div class=" footer-area ">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6">
