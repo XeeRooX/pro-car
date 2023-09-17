@@ -51,7 +51,7 @@ function PrintCars(input) {
         temp.find(".car-title").text(`${data.brand} ${data.model}`);
         temp.find(".img-cart").attr('src', `/cars/${data.id}/1.png`)
         temp.find(".car-price").text(`${data.costPerDay} <span class="product-info-price bd-highlight align-self-center px-1">₽/сутки</span>`);
-        temp.find(".car-gearbox").text(`${data.gearboxType}`);
+        temp.find(".car-gearbox").text(`${data.gearboxType} | `);
         temp.find(".car-year").text(`${data.yearOfIssue}`);
 
         $('.product-lists').append(temp);
