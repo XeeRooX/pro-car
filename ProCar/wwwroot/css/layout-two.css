@@ -6,7 +6,7 @@
     left: 0;
     right: 0;
     z-index: -1; /* needed to keep in the background */
-    background: url(../imgs/hero-bg.jpg) center center;
+    background: url(../imgs/bg.jpg) center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
