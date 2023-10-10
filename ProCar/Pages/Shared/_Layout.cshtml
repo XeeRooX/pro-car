@@ -26,10 +26,13 @@
     <link rel="stylesheet" href="~/css/all.min.css">
     <!-- bootstrap -->
     <link rel="stylesheet" href="~/css/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/bundle.min.css" >
+    <link rel="stylesheet" href="~/css/bundle.min.css">
+    <link rel="stylesheet" href="~/css/layout-two.css" asp-append-version="true">
+   
+
 </head>
 
-<body>
+<body style="overscroll-behavior:none">
 
     <!--PreLoader-->
     <div class="loader">
@@ -39,6 +42,30 @@
     </div>
     <!--PreLoader Ends-->
     <!-- header -->
+    @if (@ViewContext.RouteData.Values["page"].ToString() == "/Index")
+    {
+        <div class="hero-area hero-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col text-center">
+                        <div class="hero-text">
+                            <div class="hero-text-tablecell">
+
+                                <h1 style="font-family: 'Tenor Sans', cursive;">Аренда автомобилей в Оренбурге</h1>
+                                <div class="hero-btns">
+                                    <a href="/Cars" class="boxed-btn" style="font-family: 'Tenor Sans', cursive;">
+                                        Все автомобили
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+
     <div class="top-header-area" id="sticker">
         <div class="container">
             <div class="row">
@@ -117,7 +144,7 @@
     @RenderBody()
     </div>
     <!-- footer -->
-    <div class=" footer-area mt-4">
+    <div class=" footer-area ">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6">
@@ -144,6 +171,7 @@
                             <ul>
                                 <li><a href="https://t.me/yandex_taxi23" target="_blank"><i style="font-size: 30px" class="fab fa-telegram"></i></a></li>
                                 <li><a href="https://wa.me/79697490043" target="_blank"><i style="font-size: 30px" class="fab fa-whatsapp"></i></a></li>
+                                <li><a href="https://www.instagram.com/fgfdg" target="_blank"><i style="font-size: 30px" class="fab fa-instagram"></i></a></li>
                             </ul>
                         </div>
                     </div>
