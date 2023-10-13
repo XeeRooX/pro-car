@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 
 namespace ProCar.Models
 {
@@ -10,12 +11,23 @@ namespace ProCar.Models
         public DbSet<GearboxType> GearboxTypes { get; set; } = null!;
         public DbSet<FuelType> FuelTypes { get; set; } = null!;
         public DbSet<Brand> Brands { get; set; } = null!;
+        public DbSet<Color> Colors { get; set; } = null!;
+        //public DbSet<CarColor> CarColors { get; set; } = null!;
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+        //    modelBuilder.Entity<Car>()
+        //.HasMany(e => e.Colors)
+        //.WithMany(e => e.Cars)
+        //.UsingEntity<CarColor>(
+        //    l => l.HasOne<Color>(e => e.Color).WithMany(e => e.CarColors).HasForeignKey(e => e.ColorId),
+        //    r => r.HasOne<Car>(e => e.Car).WithMany(e => e.CarColors).HasForeignKey(e => e.CarId));
+
+        //    modelBuilder.Entity<Car>().HasOptional();
+
             modelBuilder.Entity<GearboxType>().HasData(
                 new GearboxType() { Id = 1, Name = "механическая" },
                 new GearboxType() { Id = 2, Name = "автомат" },
