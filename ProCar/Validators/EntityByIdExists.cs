@@ -12,6 +12,16 @@ namespace ProCar.Validators
         {
             CarAddDto carAddDto = (CarAddDto)value!;
             ApplicationDbContext _context = validationContext.GetService<ApplicationDbContext>()!;
+            var _colorService = validationContext.GetService<IColorService>()!;
+
+            
+            foreach (var c in carAddDto.Colors)
+            {
+                if (!_colorService.ElementExists(c))
+                {
+                    return new ValidationResult("Colors with current Id in CarAddDto is not Exists");
+                }
+            }
 
             if (_context.GearboxTypes.Find(carAddDto.GearboxTypeId) == null ||
                 _context.CarTypes.Find(carAddDto.CarTypeId) == null || 

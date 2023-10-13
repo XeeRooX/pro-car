@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ProCar.Pages.Admin.Cars
 {
-    [Authorize]
+    //[Authorize]
     public class AddModel : PageModel
     {
         private ICarsService _carsService;
@@ -29,7 +29,7 @@ namespace ProCar.Pages.Admin.Cars
         public IActionResult OnPost(IFormFileCollection photos)
         {
 
-            
+            Console.WriteLine();
             if (!ModelState.IsValid)
             {
                 FormData = _carsService.GetDataAddCarsGet();
@@ -37,7 +37,6 @@ namespace ProCar.Pages.Admin.Cars
             }
             FormData = _carsService.GetDataAddCarsGet();
 
-            Console.WriteLine("Count add -> " + photos.Count);
             int idCar = _carsService.AddCar(Input);
             _uploadService.UploadCarPhoto(idCar, photos);
             
