@@ -13,6 +13,8 @@ namespace ProCar.Models
         public int CostPerDay { get; set; } // стоимость за сутки
         public int Deposit { get; set; } // залог
         public int TimeDelayCost { get; set; } // стоимость задержки по времени
+        public double? Horsepower { get; set; }
+        public string? Equipment { get; set; }
 
         public int CarTypeId { get; set; }
         public CarType CarType { get; set; } = new();
@@ -28,6 +30,8 @@ namespace ProCar.Models
 
         public int GearboxTypeId { get; set; }
         public GearboxType GearboxType { get; set; } = new();
+
+        public List<Color> Colors { get; set; } = new();
 
     }
 }
