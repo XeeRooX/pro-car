@@ -8,12 +8,21 @@ namespace ProCar.Services
     public class CarsService : ICarsService
     {
         private ApplicationDbContext _context;
-        public CarsService(ApplicationDbContext context)
+        private IColorService _colorService;
+        public CarsService(ApplicationDbContext context, IColorService colorService)
         {
             _context = context;
+            _colorService = colorService;
         }
         public int AddCar(CarAddDto carInfo)
         {
+            var colors = new List<Color>();
+            foreach (var colorId in carInfo.Colors)
+            {
+                var color = _colorService.GetById(colorId);
+                colors.Add(color);
+            }
+
             var car = new Car()
 
             {
@@ -27,7 +36,10 @@ namespace ProCar.Services
                 DriveType = _context.DriveTypes.Find(carInfo.DriveTypeId)!,
                 GearboxType = _context.GearboxTypes.Find(carInfo.GearboxTypeId)!,
                 FuelType = _context.FuelTypes.Find(carInfo.FuelTypeId)!,
-                Brand = _context.Brands.Find(carInfo.BrandId)!
+                Brand = _context.Brands.Find(carInfo.BrandId)!,
+                Horsepower = carInfo.Horsepower,
+                Equipment = carInfo.Equipment,
+                Colors = colors
             };
 
             _context.Cars.Add(car);
@@ -50,6 +62,13 @@ namespace ProCar.Services
 
         public void EditCar(CarAddDto carInfo, int id)
         {
+            var colors = new List<Color>();
+            foreach (var colorId in carInfo.Colors)
+            {
+                var color = _colorService.GetById(colorId);
+                colors.Add(color);
+            }
+
             Car car = _context.Cars.Find(id)!;
             car.CostPerDay = carInfo.CostPerDay;
             car.Model = carInfo.Model;
@@ -62,6 +81,9 @@ namespace ProCar.Services
             car.GearboxType = _context.GearboxTypes.Find(carInfo.GearboxTypeId)!;
             car.FuelType = _context.FuelTypes.Find(carInfo.FuelTypeId)!;
             car.Brand = _context.Brands.Find(carInfo.BrandId)!;
+            car.Horsepower = carInfo.Horsepower;
+            car.Equipment = carInfo.Equipment;
+            car.Colors = colors;
 
             _context.SaveChanges();
         }
@@ -102,6 +124,7 @@ namespace ProCar.Services
                     GearboxType = car.GearboxType.Name,
                     FuelType = car.FuelType.Name,
                     Brand = car.Brand.Name,
+                    
                 });
             }
 
@@ -129,7 +152,16 @@ namespace ProCar.Services
 
         public CarEditDto GetDataEditCars(int id)
         {
-            Car car = _context.Cars.Find(id)!;
+
+
+            Car car = _context.Cars.Include(c=>c.Colors).FirstOrDefault(c=>c.Id == id)!;
+            var colors =new List<int>();
+
+            foreach (var color in car.Colors)
+            {
+                colors.Add(color.Id);   
+            }
+
             CarEditDto result = new()
             {
                 BrandId = car.BrandId,
@@ -143,7 +175,10 @@ namespace ProCar.Services
                 GearboxTypeId = car.GearboxTypeId,
                 Model = car.Model,
                 TimeDelayCost = car.TimeDelayCost,
-                YearOfIssue = car.YearOfIssue
+                YearOfIssue = car.YearOfIssue,
+                Equipment = car.Equipment,
+                Horsepower = car.Horsepower,
+                Colors = colors
             };
 
             return result;

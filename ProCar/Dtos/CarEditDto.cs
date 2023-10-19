@@ -11,11 +11,15 @@ namespace ProCar.Dtos
         public int CostPerDay { get; set; }
         public int Deposit { get; set; }
         public int TimeDelayCost { get; set; }
+        public double? Horsepower { get; set; }
+        public string? Equipment { get; set; }
+
 
         public int GearboxTypeId { get; set; }
         public int CarTypeId { get; set; }
         public int DriveTypeId { get; set; }
         public int FuelTypeId { get; set; }
         public int BrandId { get; set; }
+        public List<int> Colors { get; set; } = new();
     }
 }
