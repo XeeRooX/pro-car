@@ -10,10 +10,11 @@ namespace ProCar.Pages.Admin.CarTypes
         {
             string name = value!.ToString()!;
             var _context = validationContext.GetService<IColorService>();
-            if (_context!.ElementExists(name) != 0)
+            if (_context!.ElementExists(name) == 0)
             {
                 return ValidationResult.Success;
             }
+
             return new ValidationResult("Цвет машины с таким именем уже существует");
         }
     }

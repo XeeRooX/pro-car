@@ -12,6 +12,7 @@ namespace ProCar.Pages.Admin.Colors
     public class IndexModel : PageModel
     {
         public List<Color>? Colors { get; set; }
+        [BindProperty]
         public InputModel Input { get; set; }
         public string ErrorMsg { get; set; }
         public IColorService _colorService { get; set; }
@@ -23,6 +24,19 @@ namespace ProCar.Pages.Admin.Colors
         {
             Colors = _colorService.GetAll();
         }
+        public IActionResult OnPost()
+        {
+            if (!ModelState.IsValid)
+            {
+                Colors = _colorService.GetAll();
+                return Page();
+            }
+
+            _colorService.AddItem(Input.Name);
+            Colors = _colorService.GetAll();
+            return Page();
+        }
+
         public class InputModel
         {
             [Required(ErrorMessage = "Это поле обязательно для заполнения")]
