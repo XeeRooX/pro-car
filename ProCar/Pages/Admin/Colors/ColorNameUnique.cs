@@ -9,8 +9,8 @@ namespace ProCar.Pages.Admin.CarTypes
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
             string name = value!.ToString()!;
-            var _context = validationContext.GetService<ICarTypeService>();
-            if (!_context!.ValueExists(name))
+            var _context = validationContext.GetService<IColorService>();
+            if (_context!.ElementExists(name) != 0)
             {
                 return ValidationResult.Success;
             }

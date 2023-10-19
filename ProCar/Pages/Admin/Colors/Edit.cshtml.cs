@@ -14,20 +14,37 @@ namespace ProCar.Pages.Admin.Colors
         public string? LastName { get; set; }
         [BindProperty]
         public InputModel? Input { get; set; }
-        public ICarTypeService _carTypeService { get; set; }
-        public EditModel(ICarTypeService carTypeService)
+        public IColorService _colorService { get; set; }
+        public EditModel(IColorService colorService)
         {
-            _carTypeService = carTypeService;
+            _colorService = colorService;
         }
         public IActionResult OnGet(int id)
         {
-            if (!_carTypeService.ElementExists(id))
+            if (!_colorService.ElementExists(id))
             {
                 return NotFound();
             }
-            var item = _carTypeService.GetById(id);
+            var item = _colorService.GetById(id);
             LastName = item.Name;
             return Page();
+        }
+
+        public IActionResult OnPost(int id)
+        {
+            if (!_colorService.ElementExists(id))
+            {
+                return NotFound();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                LastName = _colorService.GetById(id).Name;
+                return Page();
+            }
+
+            _colorService.EditItem(id, Input.Name);
+            return RedirectToPage("/Admin/Colors/Index");
         }
     }
     public class InputModel
