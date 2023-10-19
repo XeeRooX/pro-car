@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using ProCar.Dtos;
 using ProCar.Services;
 using System.ComponentModel.DataAnnotations;
+using System.Reflection.Metadata.Ecma335;
 
 namespace ProCar.Pages.Admin.Cars
 {
@@ -12,18 +13,21 @@ namespace ProCar.Pages.Admin.Cars
     {
         private ICarsService _carsService;
         private IServerUploadService _uploadService;
+        private IColorService _colorService;
         public CarAddGetDto FormData { get; set; }
-
+        public List<Models.Color> Colors { get; set; }
         [BindProperty]
         public CarAddDto Input { get; set; }
-        public AddModel(ICarsService carsService, IServerUploadService uploadService)
+        public AddModel(ICarsService carsService, IServerUploadService uploadService, IColorService colorService)
         {
             _carsService = carsService;
             _uploadService = uploadService;
+            _colorService = colorService;
         }
         public void OnGet()
         {
             FormData = _carsService.GetDataAddCarsGet();
+            Colors = _colorService.GetAll();
         }
 
         public IActionResult OnPost(IFormFileCollection photos)
@@ -32,6 +36,7 @@ namespace ProCar.Pages.Admin.Cars
             Console.WriteLine();
             if (!ModelState.IsValid)
             {
+                Colors = _colorService.GetAll();
                 FormData = _carsService.GetDataAddCarsGet();
                 return Page();
             }

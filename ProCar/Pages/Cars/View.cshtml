@@ -14,14 +14,14 @@
 
     <div class="container">
 
-        
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a class="color-breadcrumb" href="/">Главная</a></li>
                 <li class="breadcrumb-item"><a class="color-breadcrumb" href="/Cars/">Все автомобили</a></li>
-            <li class="breadcrumb-item active" aria-current="page">@Model.Car.Brand.Name @Model.Car.Model</li>
-        </ol>
-    </nav>
+                <li class="breadcrumb-item active" aria-current="page">@Model.Car.Brand.Name @Model.Car.Model</li>
+            </ol>
+        </nav>
 
         @if (Model.IsConfirmed)
         {
@@ -89,6 +89,10 @@
                                 <td colspan="2" class="p-0">@Model.Car.EngineСapacity л.</td>
                             </tr>
                             <tr>
+                                <th scope="row" class="p-0">Мощность двигателя</th>
+                                <td colspan="2" class="p-0">@Model.Car.Horsepower л.c.</td>
+                            </tr>
+                            <tr>
                                 <th scope="row" class="p-0">Вид топлива</th>
                                 <td colspan="2" class="p-0">@Model.Car.FuelType.Name</td>
                             </tr>
@@ -104,6 +108,25 @@
                                 <th scope="row" class="p-0">Год выпуска</th>
                                 <td colspan="2" class="p-0">@Model.Car.YearOfIssue</td>
                             </tr>
+                            <tr>
+                                <th scope="row" class="p-0">Доступные цвета</th>
+
+                                @{
+                                    var colors = "";
+                                    foreach (var items in Model.Car.Colors)
+                                    {
+                                        colors += $"{items.Name}, ";
+                                    }
+                                    colors = colors.TrimEnd(',', ' ');
+                                    <td colspan="2" class="p-0">@colors</td>
+                                }
+
+                            </tr>
+                            <tr>
+                                <th scope="row" class="p-0">Комплектация</th>
+                                <td colspan="2" class="p-0">@Model.Car.Equipment</td>
+                            </tr>
+
                         </tbody>
                     </table>
                     <p class="single-product-pricing m-0">@Model.Car.CostPerDay ₽/сутки</p>

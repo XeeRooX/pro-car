@@ -110,7 +110,7 @@ namespace ProCar.Services
 
         public Car GetById(int id)
         {
-            return _context.Cars.Include(a => a.Brand).Include(a => a.FuelType).Include(a => a.GearboxType).Include(a => a.CarType).Include(a=>a.DriveType).FirstOrDefault(a => a.Id == id)!;
+            return _context.Cars.Include(a => a.Brand).Include(a => a.FuelType).Include(a => a.GearboxType).Include(a => a.CarType).Include(a=>a.DriveType).Include(a=>a.Colors).FirstOrDefault(a => a.Id == id)!;
         }
 
         public CarAddGetDto GetDataAddCarsGet()

@@ -28,7 +28,7 @@
 <link href="~/css/filepond/filepond-plugin-file-poster.css" rel="stylesheet">
 
 <style>
-    .compress-info{
+    .compress-info {
         background-color: #f1f0ef;
         color: #4f4f4f;
         border-radius: 12px;
@@ -115,6 +115,11 @@
         <span asp-validation-for="Input.EngineСapacity"></span>
     </div>
     <div class="mb-3">
+        <label>Мощность двигателя</label>
+        <input class="form-control" type="number" asp-for="Input.Horsepower" step="0.1" id="engine-horsepower-get" required min="0" max="10000" />
+        <span asp-validation-for="Input.Horsepower"></span>
+    </div>
+    <div class="mb-3">
         <label>Год выпуска</label>
         <input class="form-control" asp-for="Input.YearOfIssue" value="" required type="number" min="1900" max="9999" />
         <span asp-validation-for="Input.YearOfIssue"></span>
@@ -134,7 +139,24 @@
         <input class="form-control" asp-for="Input.TimeDelayCost" value="" required type="number" min="0" />
         <span asp-validation-for="Input.TimeDelayCost"></span>
     </div>
-    <input type="file" class="filepond" name="photos" multiple/>
+    <div class="mb-3">
+        <label>Комплектация</label>
+        <input class="form-control" asp-for="Input.Equipment" value="" required type="text"  />
+        <span asp-validation-for="Input.Equipment"></span>
+    </div>
+    <label>Выберите цвета автомобиля</label>
+    <div class="d-flex">
+        @foreach(var item in Model.Colors){
+            <div class="form-check mx-2">
+                <input class="form-check-input" name="Input.Colors" type="checkbox" value="@item.Id" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                    @item.Name
+                </label>
+            </div>
+        }
+    </div>
+    <span asp-validation-for="Input.Colors"></span>
+    <input type="file" class="filepond" name="photos" multiple />
 
     <div class="compress-info text-center p-3 mb-3 d-none">
         <label>Сжатие фотографий...</label>
@@ -165,7 +187,7 @@
 
     });
     var api = "/data/imgs/";
-    
+
     $(document).ready(function (e) {
         pond = FilePond.create(
             document.querySelector('.filepond'), {
@@ -189,9 +211,9 @@
             // append FilePond files into the form data
             pondFiles = pond.getFiles();
 
-            const compressImage = async (image)=>{
-                try{ 
-                    var compressed = await new Promise((resolve, reject)=>{
+            const compressImage = async (image) => {
+                try {
+                    var compressed = await new Promise((resolve, reject) => {
                         new Compressor(image, {
                             quality: 0.6,
                             maxWidth: 1600,
@@ -202,7 +224,7 @@
                             error(err) {
                                 reject(err);
                             }
-                        });   
+                        });
                     });
 
                     return compressed;
@@ -219,6 +241,12 @@
             }
 
             $('.compress-info').addClass('d-none');
+            console.log(formdata.values());
+            for (const value of formdata.entries()) {
+
+                console.log(value[0] + "   " + value[1]);
+            }
+            alert("");
 
             $.ajax({
                 url: "/Admin/Cars/Add",
@@ -235,8 +263,10 @@
                         document.close();
                     }
                 },
-                error: function () {
+                error: function (e) {
+
                     console.log("ajax error");
+                    console.log(e);
                 }
             });
 
