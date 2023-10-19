@@ -19,7 +19,19 @@ namespace ProCar.Pages.Admin.Colors
             {
                 return NotFound();
             }
+            _colorService.DeleteItem(id);
             return Page();
+        }
+        public IActionResult OnPost(int id)
+        {
+            if (!_colorService.ElementExists(id))
+            {
+                return NotFound();
+            }
+
+            _colorService.DeleteItem(id);
+           
+            return RedirectToPage("/Admin/Colors/Index");
         }
     }
 }
