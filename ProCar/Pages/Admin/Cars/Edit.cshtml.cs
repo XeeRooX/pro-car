@@ -11,16 +11,19 @@ namespace ProCar.Pages.Admin.Cars
     {
         private ICarsService _carsService;
         private IServerUploadService _uploadService;
+        private readonly IColorService _colorService;
         public CarAddGetDto DropdownFormData { get; set; }
         public CarEditDto FormData { get; set; }
+        public List<Models.Color> Colors { get; set; }
         public int CountPhotos { get; set; }
         public string RequestString { get; set; }
         [BindProperty]
         public CarAddDto Input { get; set; }
-        public EditModel(ICarsService carsService, IServerUploadService uploadService)
+        public EditModel(ICarsService carsService, IServerUploadService uploadService, IColorService colorService)
         {
             _carsService = carsService;
             _uploadService = uploadService;
+            _colorService = colorService;
         }
         public IActionResult OnGet(int id)
         {
@@ -31,6 +34,7 @@ namespace ProCar.Pages.Admin.Cars
 
             DropdownFormData = _carsService.GetDataAddCarsGet();
             FormData = _carsService.GetDataEditCars(id);
+            Colors = _colorService.GetAll();
             CountPhotos = _uploadService.CountCarPhotos(id);
             RequestString = $"{id}/";
 
@@ -51,6 +55,7 @@ namespace ProCar.Pages.Admin.Cars
             }
 
             _carsService.EditCar(Input, id);
+            Colors = _colorService.GetAll();
             _uploadService.DeleteCarPhoto(id);
             _uploadService.UploadCarPhoto(id, photos);
 

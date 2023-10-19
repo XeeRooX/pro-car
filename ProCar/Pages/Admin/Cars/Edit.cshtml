@@ -97,9 +97,9 @@
         <select class="form-select" asp-for="Input.GearboxTypeId" required>
             <option selected value="" disabled>-- Выберите тип --</option>
             <@foreach (var item in Model.DropdownFormData.GearboxTypes)
-            {
-                if (item.Id == Model.FormData.GearboxTypeId)
-                {
+                      {
+                      if (item.Id == Model.FormData.GearboxTypeId)
+                      {
                             <option value="@item.Id" selected>@item.Name</option>
                 }
                 else
@@ -131,10 +131,15 @@
     <div class="mb-3">
         <label>Объем двигателя</label>
         @*<input class="form-control" type="number" step="0.1" id="engine-capacity-get" required min="0" max="10" />
-        <input class="form-control d-none" asp-for="Input.EngineСapacity" id="engine-capacity-text" type="text" />*@ 
+        <input class="form-control d-none" asp-for="Input.EngineСapacity" id="engine-capacity-text" type="text" />*@
         <input value="@Model.FormData.EngineСapacity" id="engine-capacity-str" class="d-none" />
         <input class="form-control" value="@Model.FormData.EngineСapacity" asp-for="Input.EngineСapacity" type="number" step="0.1" id="engine-capacity" required min="0" max="10" />
         <span asp-validation-for="Input.EngineСapacity"></span>
+    </div>
+    <div class="mb-3">
+        <label>Мощность двигателя</label>
+        <input class="form-control" type="number" value="@Model.FormData.Horsepower" asp-for="Input.Horsepower" step="0.1" id="engine-horsepower-get" required min="0" max="10000" />
+        <span asp-validation-for="Input.Horsepower"></span>
     </div>
     <div class="mb-3">
         <label>Год выпуска</label>
@@ -156,7 +161,32 @@
         <input class="form-control" asp-for="Input.TimeDelayCost" value="@Model.FormData.TimeDelayCost" required type="number" min="0" />
         <span asp-validation-for="Input.TimeDelayCost"></span>
     </div>
+    <div class="mb-3">
+        <label>Комплектация</label>
+        <input class="form-control" asp-for="Input.Equipment" value="@Model.FormData.Equipment" required type="text" />
+        <span asp-validation-for="Input.Equipment"></span>
+    </div>
+    <label>Выберите цвета автомобиля</label>
+    <div class="d-flex">
+        @foreach (var item in Model.Colors)
+        {
+            <div class="form-check mx-2">
+                @if (Model.FormData.Colors.Contains(item.Id))
+                {
+                    <input class="form-check-input" name="Input.Colors" type="checkbox" value="@item.Id" id="flexCheckDefault" checked>
 
+                }
+                else
+                {
+                    <input class="form-check-input" name="Input.Colors" type="checkbox" value="@item.Id" id="flexCheckDefault">
+                }
+                <label class="form-check-label" for="flexCheckDefault">
+                    @item.Name
+                </label>
+            </div>
+        }
+    </div>
+    <span asp-validation-for="Input.Colors"></span>
     <input type="file" class="filepond" name="photos" multiple />
     <div class="compress-info text-center p-3 mb-3 d-none">
         <label>Сжатие фотографий...</label>
@@ -212,74 +242,74 @@
     {
         string x = Model.RequestString + idx.ToString() + ".png";
         <text>
-            {
-                        source:'@(idx).png',
+                    {
+                        source: '@(idx).png',
                         options: {
-                        type: 'local'
-                    }
-                            },
+                            type: 'local'
+                        }
+                    },
         </text>
+    }
+
+                        ]
+
+        });
+
+
+        $("#uploadform").submit(async function (e) {
+            e.preventDefault();
+            var formdata = new FormData(this);
+            // append FilePond files into the form data
+            pondFiles = pond.getFiles();
+
+            const compressImage = async (image) => {
+                try {
+                    var compressed = await new Promise((resolve, reject) => {
+                        new Compressor(image, {
+                            quality: 0.6,
+                            maxWidth: 1600,
+                            maxHeight: 1600,
+                            success(result) {
+                                resolve(result);
+                            },
+                            error(err) {
+                                reject(err);
+                            }
+                        });
+                    });
+
+                    return compressed;
+                } catch (error) {
+                    console.error(error);
+                }
+            };
+
+            $('.compress-info').removeClass('d-none');
+
+            for (var i = 0; i < pondFiles.length; i++) {
+                var photo = await compressImage(pondFiles[i].file);
+                formdata.append('photos', photo);
             }
 
-                ]
+            $('.compress-info').addClass('d-none');
+
+            $.ajax({
+                url: "/Admin/Cars/Edit/@(RouteData.Values["id"])",
+                data: formdata,
+                processData: false,
+                contentType: false,
+                method: "post",
+                success: function (result) {
+                    if (result.redirectUrl !== undefined) {
+                        window.location.replace(result.redirectUrl);
+                    } else {
+                        console.log("ajax request error");
+                    }
+                },
 
             });
 
-
-    $("#uploadform").submit(async function (e) {
-        e.preventDefault();
-        var formdata = new FormData(this);
-        // append FilePond files into the form data
-        pondFiles = pond.getFiles();
-
-        const compressImage = async (image) => {
-            try {
-                var compressed = await new Promise((resolve, reject) => {
-                    new Compressor(image, {
-                        quality: 0.6,
-                        maxWidth: 1600,
-                        maxHeight: 1600,
-                        success(result) {
-                            resolve(result);
-                        },
-                        error(err) {
-                            reject(err);
-                        }
-                    });
-                });
-
-                return compressed;
-            } catch (error) {
-                console.error(error);
-            }
-        };
-
-        $('.compress-info').removeClass('d-none');
-
-        for (var i = 0; i < pondFiles.length; i++) {
-            var photo = await compressImage(pondFiles[i].file);
-            formdata.append('photos', photo);
-        }
-
-        $('.compress-info').addClass('d-none');
-
-        $.ajax({
-            url: "/Admin/Cars/Edit/@(RouteData.Values["id"])",
-            data: formdata,
-            processData: false,
-            contentType: false,
-            method: "post",
-            success: function (result) {
-                if (result.redirectUrl !== undefined) {
-                    window.location.replace(result.redirectUrl);
-                } else {
-                    console.log("ajax request error");
-                }
-            },
-
-        });
-
-    })
-        });
+        })
+    });
 </script>
 
