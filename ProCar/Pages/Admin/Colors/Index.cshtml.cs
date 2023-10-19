@@ -11,17 +11,17 @@ namespace ProCar.Pages.Admin.Colors
     [Authorize]
     public class IndexModel : PageModel
     {
-        public List<CarType>? Colors { get; set; }
+        public List<Color>? Colors { get; set; }
         public InputModel Input { get; set; }
         public string ErrorMsg { get; set; }
-        public ICarTypeService _carTypeService { get; set; }
-        public IndexModel(ICarTypeService carTypeService)
+        public IColorService _colorService { get; set; }
+        public IndexModel(IColorService colorService)
         {
-            _carTypeService = carTypeService;
+            _colorService = colorService;
         }
         public void OnGet()
         {
-            Colors = _carTypeService.GetAll();
+            Colors = _colorService.GetAll();
         }
         public class InputModel
         {
