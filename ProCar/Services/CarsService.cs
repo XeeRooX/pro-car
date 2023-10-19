@@ -69,7 +69,8 @@ namespace ProCar.Services
                 colors.Add(color);
             }
 
-            Car car = _context.Cars.Find(id)!;
+            Car car = _context.Cars.Include(a=>a.Colors).FirstOrDefault(a=>a.Id == id)!;
+            car.Colors.Clear();
             car.CostPerDay = carInfo.CostPerDay;
             car.Model = carInfo.Model;
             car.EngineСapacity = carInfo.EngineСapacity;
@@ -83,7 +84,10 @@ namespace ProCar.Services
             car.Brand = _context.Brands.Find(carInfo.BrandId)!;
             car.Horsepower = carInfo.Horsepower;
             car.Equipment = carInfo.Equipment;
-            car.Colors = colors;
+            foreach (var item in colors)
+            {
+                car.Colors.Add(item);
+            }
 
             _context.SaveChanges();
         }
