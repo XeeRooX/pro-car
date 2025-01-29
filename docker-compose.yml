@@ -17,9 +17,13 @@ services:
     volumes:
       - photosCars:/app/Data/imgs/
     environment:
-      ConnectionStrings__DefaultConnection: "server=db;port=3306;user=newuser;database=mydb;password=password;"
+      ConnectionStrings__DefaultConnection: "server=db;port=3306;user=newuser;database=mydb;password=8Of1pv9zM6ai;"
       ASPNETCORE_ENVIRONMENT: "Production"
       ASPNETCORE_URLS: "http://+:5000"
+      ServerSecrets__Hostname: "proauto56.ru"
+      BotSettings__Token: "6507488571:AAH-1WfVrNxKq71n-ioNTNLYQjggxxOmVd0"
+      BotSettings__ChatId: "-1001901156015"
+      AdminPassword: "tR2XzPo9"
     expose:
     - "5000"
 
@@ -35,7 +39,7 @@ services:
     environment: 
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_USER: newuser
-      MYSQL_PASSWORD: password
+      MYSQL_PASSWORD: 8Of1pv9zM6ai
       MYSQL_DATABASE: mydb
 
   proxy:

@@ -25,6 +25,7 @@ builder.Services.AddScoped<ICarsService, CarsService>();
 builder.Services.AddSingleton<IBotMessageService, BotMessageService>();
 
 builder.Services.AddScoped<IServerUploadService, ServerUploadService>();
+builder.Services.AddScoped<IColorService, ColorService>();
 
 var app = builder.Build();
 
