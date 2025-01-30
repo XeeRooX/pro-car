@@ -11,6 +11,7 @@ namespace ProCar.Pages.Cars
         private IBrandService _brandService;
         private ICarTypeService _carTypeService;
         private ICarsService _carsService;
+        private readonly IContactService _contactService;
 
         public List<Brand> Brands { get; set; }
         public List<CarType> CarTypes { get; set; }
@@ -20,14 +21,18 @@ namespace ProCar.Pages.Cars
         public int CarTypeId { get; set; }
         public bool ShowLoadButton { get; set; } = false;
 
-        public IndexModel(IBrandService brandService, ICarTypeService carTypeService, ICarsService carsService)
+        public IndexModel(IBrandService brandService, ICarTypeService carTypeService, ICarsService carsService, IContactService contactService)
         {
             _brandService = brandService;
             _carTypeService = carTypeService;
             _carsService = carsService;
+            _contactService = contactService;
         }
         public IActionResult OnGet(int brand, int cartype)
         {
+            ViewData[nameof(ContactDetails)] = _contactService.GetContactDetails();
+            ViewData["SocialNetworks"] = _contactService.GetSocialNetworks();
+
             const int countLoad = 6;
             int countCars = 0;
 

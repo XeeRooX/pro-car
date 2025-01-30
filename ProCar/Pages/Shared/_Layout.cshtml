@@ -1,4 +1,8 @@
-﻿
+﻿@using ProCar.Models
+@{
+    var contact = (ContactDetails)ViewData["ContactDetails"]!;
+    var socialNetwoks = (List<SocialNetwork>)ViewData["SocialNetworks"]!;
+}
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -100,7 +104,7 @@
                                 <li><a href="/Conditions">Условия</a></li>
                                 <li>
                                     <div class="header-icons">
-                                        <a class="mobile-hide" href="tel:+79697490043"><i class="fas "></i>+7 969 749 00-43</a>
+                                        <a class="mobile-hide" href="tel:@contact.PhoneNumber.Replace(" ", "").Replace("-", "")"><i class="fas "></i>@contact.PhoneNumber</a>
                                     </div>
                                 </li>
                             </ul>
@@ -131,7 +135,7 @@
                                             <a href="/Conditions" class="nav-link"><span><img width="24" src="~/imgs/info-square.svg" class="me-3" /></span>Условия</a>
                                         </li>
                                         <li class="nav-item mt-4">
-                                            <a class="mobile-hide nav-link" href="tel:+79697490043"><i class="fas "></i><span><img width="24" src="~/imgs/telephone-fill.svg" class="me-3" /></span>+7 969 749 00-43</a>
+                                            <a class="mobile-hide nav-link" href="tel:@contact.PhoneNumber.Replace(" ", "").Replace("-", "")"><i class="fas "></i><span><img width="24" src="~/imgs/telephone-fill.svg" class="me-3" /></span>@contact.PhoneNumber</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -165,9 +169,9 @@
                     <div class="footer-box get-in-touch">
                         <h2 class="widget-title">Как нас найти</h2>
                         <ul>
-                            <li>г. Оренбург, ул. Одесская, 23</li>
-                            <li><a href="mailto:proavtooren@yandex.ru">proavtooren@yandex.ru</a></li>
-                            <li><a href="tel:+79697490043">+7 969 749 00-43</a></li>
+                            <li>@contact.Address</li>
+                            <li><a href="mailto:@contact.Email">@contact.Email</a></li>
+                            <li><a href="tel:@contact.PhoneNumber.Replace(" ", "").Replace("-", "")">@contact.PhoneNumber</a></li>
                         </ul>
                     </div>
                 </div>
@@ -177,9 +181,10 @@
                         <p></p>
                         <div class="social-icons">
                             <ul>
-                                <li><a href="https://t.me/yandex_taxi23" target="_blank"><i style="font-size: 30px" class="fab fa-telegram"></i></a></li>
-                                <li><a href="https://wa.me/79697490043" target="_blank"><i style="font-size: 30px" class="fab fa-whatsapp"></i></a></li>
-                                <li><a href="https://instagram.com/proavto56" target="_blank"><i style="font-size: 30px" class="fab fa-instagram"></i></a></li>
+                                @foreach (var item in socialNetwoks)
+                                {
+                                    <li><a href="@item.Link" target="_blank"><i style="font-size: 30px" class="fab fa-@item.Icon"></i></a></li>
+                                }
                             </ul>
                         </div>
                     </div>

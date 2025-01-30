@@ -15,18 +15,23 @@ namespace ProCar.Pages.Cars
         private readonly IServerUploadService _uploadService;
         private readonly IConfiguration _configuration;
         private readonly IBotMessageService _botMessage;
+        private readonly IContactService _contactService;
         public Car Car { get; set; } = new();
         public bool IsConfirmed { get; set; }
         public int CountPhoto { get; set; }
-        public ViewModel(ICarsService carsService, IServerUploadService uploadService, IConfiguration configuration, IBotMessageService botMessage)
+        public ViewModel(ICarsService carsService, IServerUploadService uploadService, IConfiguration configuration, IBotMessageService botMessage, IContactService contactService)
         {
             _carsService = carsService;
             _uploadService = uploadService;
             _configuration = configuration;
             _botMessage = botMessage;
+            _contactService = contactService;
         }
         public IActionResult OnGet(int id)
         {
+            ViewData[nameof(ContactDetails)] = _contactService.GetContactDetails();
+            ViewData["SocialNetworks"] = _contactService.GetSocialNetworks();
+
             Car = _carsService.GetById(id);
             if(Car == null)
             {

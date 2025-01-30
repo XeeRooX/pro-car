@@ -19,15 +19,15 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="">
                         <p class="orange-text-size mb-1">Телефон</p>
-                        <a href="tel:+79697490043"><p style="font-family: 'Tenor Sans'">+7 969 749 00-43</p></a>
+                        <a href="tel:+79697490043"><p style="font-family: 'Tenor Sans'"> @Html.DisplayFor(model => model.ContactDetails.PhoneNumber)</p></a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="">
                         <p class="orange-text-size mb-1">Адрес</p>
                         <ul>
-                            <li>г. Оренбург, ул. Одесская, 23</li>
-                            <li><a href="mailto:proavtooren@yandex.ru">proavtooren@yandex.ru</a></li>
+                            <li>@Html.DisplayFor(model => model.ContactDetails.Address)</li>
+                            <li><a href="mailto:@Html.DisplayFor(model => model.ContactDetails.Email)">@Html.DisplayFor(model => model.ContactDetails.Email)</a></li>
                         </ul>
                     </div>
                 </div>
@@ -36,10 +36,10 @@
                         <p class="orange-text-size mb-1">Для связи</p>
                         <div class="d-flex w-100 text-center">
 
-                            <a href="https://t.me/yandex_taxi23" target="_blank" style="font-size: 30px"><i style="color:black" class="fab px-2 fa-telegram bd-highlight"></i></a>
-                            <a href="https://wa.me/79697490043" target="_blank" style="font-size: 30px"><i style="color:black" class="fab px-2 fa-whatsapp bd-highlight"></i></a>
-                            <a href="https://www.instagram.com/fgfdg" target="_blank" style="font-size: 30px"><i style="color:black" class="fab px-2 fa-instagram bd-highlight"></i></a>
-
+                            @foreach (var item in Model.SocialNetworks)
+                            {
+                                <a href="@item.Link" target="_blank" style="font-size: 30px"><i style="color:black" class="fab px-2 fa-@item.Icon bd-highlight"></i></a>
+                            }
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
     <div class="container">
         <h3><span class="orange-text">Где нас найти</span></h3>
         <div>
-            <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ae15ba2ef1d406f5e87f54c6717959fd2adddc1f41e48301d66d7136c56266532&amp;width=100%25&amp;height=600&amp;lang=ru_RU&amp;scroll=false"></script>
+            <script type="text/javascript" charset="utf-8" async src="@Html.DisplayFor(model => model.ContactDetails.MapPoint)"></script>
         </div>
     </div>
 </div>

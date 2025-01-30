@@ -1,0 +1,58 @@
+﻿@page
+@model ProCar.Pages.Admin.SocialNetworks.IndexModel
+
+@{
+    ViewData["Title"] = "Социальные сети";
+}
+
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Admin/Index">Панель администратора</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Социальные сети</li>
+    </ol>
+</nav>
+
+<h2>Социальные сети</h2>
+<p class="mt-3">
+    Здесь Вы можете просмотреть уже существующие ссылки на социальные сети. Также Вы можете отредактировать уже существующие данные или добавить новые
+</p>
+<p>
+    <a asp-page="Create">Добавить новую</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Наименование
+            </th>
+            <th>
+                Ссылка
+            </th>
+            <th>
+                Иконка
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.SocialNetwork)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Link)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Icon)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Редактировать</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id">Детали</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

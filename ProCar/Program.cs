@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using ProCar.Models;
@@ -26,6 +25,7 @@ builder.Services.AddSingleton<IBotMessageService, BotMessageService>();
 
 builder.Services.AddScoped<IServerUploadService, ServerUploadService>();
 builder.Services.AddScoped<IColorService, ColorService>();
+builder.Services.AddScoped<IContactService, ContactService>();
 
 var app = builder.Build();
 
@@ -38,7 +38,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 var webRootProvider = new PhysicalFileProvider(builder.Environment.WebRootPath);
-var newPathProvider = new PhysicalFileProvider(Path.Join(builder.Environment.ContentRootPath,"Data","imgs"));
+var newPathProvider = new PhysicalFileProvider(Path.Join(builder.Environment.ContentRootPath, "Data", "imgs"));
 
 var compositeProvider = new CompositeFileProvider(webRootProvider,
                                                   newPathProvider);

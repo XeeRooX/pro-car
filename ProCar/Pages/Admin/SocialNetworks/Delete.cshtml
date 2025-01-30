@@ -1,0 +1,39 @@
+﻿@page
+@model ProCar.Pages.Admin.SocialNetworks.DeleteModel
+
+@{
+    ViewData["Title"] = "Удалить";
+}
+
+<h1></h1>
+
+<h3>Вы действительно хотите удалить?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Название
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SocialNetwork.Name)
+        </dd>
+        <dt class="col-sm-2">
+            Ссылка
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SocialNetwork.Link)
+        </dd>
+        <dt class="col-sm-2">
+            Иконка
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SocialNetwork.Icon)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="SocialNetwork.Id" />
+        <input type="submit" value="Удалить" class="btn btn-danger" /> |
+        <a asp-page="./Index">Назад</a>
+    </form>
+</div>

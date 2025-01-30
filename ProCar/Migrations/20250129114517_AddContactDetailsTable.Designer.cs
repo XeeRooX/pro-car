@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProCar.Models;
 
@@ -10,9 +11,10 @@ using ProCar.Models;
 namespace ProCar.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250129114517_AddContactDetailsTable")]
+    partial class AddContactDetailsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -165,16 +167,6 @@ namespace ProCar.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ContactDetails");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "г. Оренбург, ул. Одесская, 23",
-                            Email = "proavtooren@yandex.ru",
-                            MapPoint = "https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Ae15ba2ef1d406f5e87f54c6717959fd2adddc1f41e48301d66d7136c56266532&amp;width=100%25&amp;height=600&amp;lang=ru_RU&amp;scroll=false",
-                            PhoneNumber = "+7 969 749 00-43"
-                        });
                 });
 
             modelBuilder.Entity("ProCar.Models.DriveType", b =>
@@ -309,29 +301,6 @@ namespace ProCar.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SocialNetworks");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Icon = "telegram",
-                            Link = "https://t.me/yandex_taxi23",
-                            Name = "Телеграм"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Icon = "whatsapp",
-                            Link = "https://wa.me/79697490043",
-                            Name = "whats app"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Icon = "instagram",
-                            Link = "https://www.instagram.com/fgfdg",
-                            Name = "instagram"
-                        });
                 });
 
             modelBuilder.Entity("CarColor", b =>

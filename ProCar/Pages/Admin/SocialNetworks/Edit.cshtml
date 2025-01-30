@@ -1,0 +1,45 @@
+﻿@page
+@model ProCar.Pages.Admin.SocialNetworks.EditModel
+
+@{
+    ViewData["Title"] = "Редактировать";
+}
+
+<h1>Edit</h1>
+
+<h4>SocialNetwork</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="SocialNetwork.Id" />
+            <div class="form-group">
+                <label asp-for="SocialNetwork.Name" class="control-label">Название</label>
+                <input asp-for="SocialNetwork.Name" class="form-control" />
+                <span asp-validation-for="SocialNetwork.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SocialNetwork.Link" class="control-label">Ссылка</label>
+                <input asp-for="SocialNetwork.Link" class="form-control" />
+                <span asp-validation-for="SocialNetwork.Link" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SocialNetwork.Icon" class="control-label">Иконка</label>
+                <input asp-for="SocialNetwork.Icon" class="form-control" />
+                <span asp-validation-for="SocialNetwork.Icon" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Назад</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

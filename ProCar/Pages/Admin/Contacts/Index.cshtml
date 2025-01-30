@@ -1,0 +1,48 @@
+﻿@page
+@model ProCar.Pages.Admin.Contacts.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Admin/Index">Панель администратора</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Контактная информация</li>
+    </ol>
+</nav>
+
+<h2>Контактная информация</h2>
+<p class="mt-3">
+    Здесь Вы можете просмотреть уже существующую контактную информацию. Также Вы можете отредактировать уже существующие данные или добавить новые
+</p>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ContactDetails.Id" />
+            <div class="form-group">
+                <label asp-for="ContactDetails.PhoneNumber" class="control-label">Номер телефона</label>
+                <input asp-for="ContactDetails.PhoneNumber" class="form-control" />
+                <span asp-validation-for="ContactDetails.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContactDetails.Email" class="control-label"></label>
+                <input asp-for="ContactDetails.Email" class="form-control" />
+                <span asp-validation-for="ContactDetails.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContactDetails.Address" class="control-label">Адрес</label>
+                <input asp-for="ContactDetails.Address" class="form-control" />
+                <span asp-validation-for="ContactDetails.Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ContactDetails.MapPoint" class="control-label">Координаты яндекс карт</label>
+                <input asp-for="ContactDetails.MapPoint" class="form-control" />
+                <span asp-validation-for="ContactDetails.MapPoint" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
